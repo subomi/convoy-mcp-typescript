@@ -3,11 +3,15 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
+
+export const EndpointAuthenticationType = {
+  ApiKey: "api_key",
+} as const;
+export type EndpointAuthenticationType = ClosedEnum<
+  typeof EndpointAuthenticationType
+>;
 
 export const EndpointAuthenticationType$zodSchema = z.enum([
   "api_key",
 ]);
-
-export type EndpointAuthenticationType = z.infer<
-  typeof EndpointAuthenticationType$zodSchema
->;

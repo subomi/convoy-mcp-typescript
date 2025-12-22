@@ -3,7 +3,7 @@
  */
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { SDKCore } from "../core.js";
+import { ConvoyCore } from "../core.js";
 import { SDKOptions } from "../lib/config.js";
 import type { ConsoleLogger } from "./console-logger.js";
 import { createRegisterPrompt } from "./prompts.js";
@@ -13,26 +13,82 @@ import {
 } from "./resources.js";
 import { MCPScope } from "./scopes.js";
 import { createRegisterTool } from "./tools.js";
+import { tool$deliveryAttemptsGetDeliveryAttempt } from "./tools/deliveryAttemptsGetDeliveryAttempt.js";
+import { tool$deliveryAttemptsGetDeliveryAttempts } from "./tools/deliveryAttemptsGetDeliveryAttempts.js";
+import { tool$endpointsActivateEndpoint } from "./tools/endpointsActivateEndpoint.js";
 import { tool$endpointsCreateEndpoint } from "./tools/endpointsCreateEndpoint.js";
+import { tool$endpointsDeleteEndpoint } from "./tools/endpointsDeleteEndpoint.js";
+import { tool$endpointsExpireSecret } from "./tools/endpointsExpireSecret.js";
 import { tool$endpointsGetEndpoint } from "./tools/endpointsGetEndpoint.js";
 import { tool$endpointsGetEndpoints } from "./tools/endpointsGetEndpoints.js";
+import { tool$endpointsPauseEndpoint } from "./tools/endpointsPauseEndpoint.js";
+import { tool$endpointsUpdateEndpoint } from "./tools/endpointsUpdateEndpoint.js";
+import { tool$eventDeliveriesBatchRetryEventDelivery } from "./tools/eventDeliveriesBatchRetryEventDelivery.js";
+import { tool$eventDeliveriesForceResendEventDeliveries } from "./tools/eventDeliveriesForceResendEventDeliveries.js";
+import { tool$eventDeliveriesGetEventDeliveriesPaged } from "./tools/eventDeliveriesGetEventDeliveriesPaged.js";
+import { tool$eventDeliveriesGetEventDelivery } from "./tools/eventDeliveriesGetEventDelivery.js";
+import { tool$eventDeliveriesResendEventDelivery } from "./tools/eventDeliveriesResendEventDelivery.js";
+import { tool$eventsBatchReplayEvents } from "./tools/eventsBatchReplayEvents.js";
+import { tool$eventsCreateBroadcastEvent } from "./tools/eventsCreateBroadcastEvent.js";
+import { tool$eventsCreateDynamicEvent } from "./tools/eventsCreateDynamicEvent.js";
+import { tool$eventsCreateEndpointEvent } from "./tools/eventsCreateEndpointEvent.js";
+import { tool$eventsCreateEndpointFanoutEvent } from "./tools/eventsCreateEndpointFanoutEvent.js";
+import { tool$eventsGetEndpointEvent } from "./tools/eventsGetEndpointEvent.js";
+import { tool$eventsGetEventsPaged } from "./tools/eventsGetEventsPaged.js";
+import { tool$eventsReplayEndpointEvent } from "./tools/eventsReplayEndpointEvent.js";
+import { tool$eventTypesCreateEventType } from "./tools/eventTypesCreateEventType.js";
+import { tool$eventTypesDeprecateEventType } from "./tools/eventTypesDeprecateEventType.js";
+import { tool$eventTypesGetEventTypes } from "./tools/eventTypesGetEventTypes.js";
+import { tool$eventTypesImportOpenApiSpec } from "./tools/eventTypesImportOpenApiSpec.js";
+import { tool$eventTypesUpdateEventType } from "./tools/eventTypesUpdateEventType.js";
+import { tool$filtersBulkCreateFilters } from "./tools/filtersBulkCreateFilters.js";
+import { tool$filtersBulkUpdateFilters } from "./tools/filtersBulkUpdateFilters.js";
+import { tool$filtersCreateFilter } from "./tools/filtersCreateFilter.js";
+import { tool$filtersDeleteFilter } from "./tools/filtersDeleteFilter.js";
+import { tool$filtersGetFilter } from "./tools/filtersGetFilter.js";
+import { tool$filtersGetFilters } from "./tools/filtersGetFilters.js";
+import { tool$filtersTestFilter } from "./tools/filtersTestFilter.js";
+import { tool$filtersUpdateFilter } from "./tools/filtersUpdateFilter.js";
+import { tool$metaEventsGetMetaEvent } from "./tools/metaEventsGetMetaEvent.js";
+import { tool$metaEventsGetMetaEventsPaged } from "./tools/metaEventsGetMetaEventsPaged.js";
+import { tool$metaEventsResendMetaEvent } from "./tools/metaEventsResendMetaEvent.js";
+import { tool$portalLinksCreatePortalLink } from "./tools/portalLinksCreatePortalLink.js";
+import { tool$portalLinksGeneratePortalToken } from "./tools/portalLinksGeneratePortalToken.js";
+import { tool$portalLinksGetPortalLink } from "./tools/portalLinksGetPortalLink.js";
+import { tool$portalLinksLoadPortalLinksPaged } from "./tools/portalLinksLoadPortalLinksPaged.js";
+import { tool$portalLinksRefreshPortalLinkAuthToken } from "./tools/portalLinksRefreshPortalLinkAuthToken.js";
+import { tool$portalLinksRevokePortalLink } from "./tools/portalLinksRevokePortalLink.js";
+import { tool$portalLinksUpdatePortalLink } from "./tools/portalLinksUpdatePortalLink.js";
+import { tool$sourcesCreateSource } from "./tools/sourcesCreateSource.js";
+import { tool$sourcesDeleteSource } from "./tools/sourcesDeleteSource.js";
+import { tool$sourcesGetSource } from "./tools/sourcesGetSource.js";
+import { tool$sourcesLoadSourcesPaged } from "./tools/sourcesLoadSourcesPaged.js";
+import { tool$sourcesTestSourceFunction } from "./tools/sourcesTestSourceFunction.js";
+import { tool$sourcesUpdateSource } from "./tools/sourcesUpdateSource.js";
+import { tool$subscriptionsCreateSubscription } from "./tools/subscriptionsCreateSubscription.js";
+import { tool$subscriptionsDeleteSubscription } from "./tools/subscriptionsDeleteSubscription.js";
+import { tool$subscriptionsGetSubscription } from "./tools/subscriptionsGetSubscription.js";
+import { tool$subscriptionsGetSubscriptions } from "./tools/subscriptionsGetSubscriptions.js";
+import { tool$subscriptionsTestSubscriptionFilter } from "./tools/subscriptionsTestSubscriptionFilter.js";
+import { tool$subscriptionsTestSubscriptionFunction } from "./tools/subscriptionsTestSubscriptionFunction.js";
+import { tool$subscriptionsUpdateSubscription } from "./tools/subscriptionsUpdateSubscription.js";
 
 export function createMCPServer(deps: {
   logger: ConsoleLogger;
   allowedTools?: string[] | undefined;
   scopes?: MCPScope[] | undefined;
-  getSDK?: () => SDKCore;
+  getSDK?: () => ConvoyCore;
   serverURL?: string | undefined;
   security?: SDKOptions["security"] | undefined;
   serverIdx?: SDKOptions["serverIdx"] | undefined;
 }) {
   const server = new McpServer({
-    name: "SDK",
-    version: "0.3.0",
+    name: "Convoy",
+    version: "0.4.0",
   });
 
   const getClient = deps.getSDK || (() =>
-    new SDKCore({
+    new ConvoyCore({
       security: deps.security,
       serverURL: deps.serverURL,
       serverIdx: deps.serverIdx,
@@ -48,7 +104,7 @@ export function createMCPServer(deps: {
   const scopes = new Set(deps.scopes);
 
   const allowedTools = deps.allowedTools && new Set(deps.allowedTools);
-  const tool = createRegisterTool(
+  const [tool, tools] = createRegisterTool(
     deps.logger,
     server,
     getClient,
@@ -73,7 +129,63 @@ export function createMCPServer(deps: {
 
   tool(tool$endpointsGetEndpoints);
   tool(tool$endpointsCreateEndpoint);
+  tool(tool$endpointsDeleteEndpoint);
   tool(tool$endpointsGetEndpoint);
+  tool(tool$endpointsUpdateEndpoint);
+  tool(tool$endpointsActivateEndpoint);
+  tool(tool$endpointsExpireSecret);
+  tool(tool$endpointsPauseEndpoint);
+  tool(tool$eventTypesGetEventTypes);
+  tool(tool$eventTypesCreateEventType);
+  tool(tool$eventTypesUpdateEventType);
+  tool(tool$eventTypesDeprecateEventType);
+  tool(tool$eventTypesImportOpenApiSpec);
+  tool(tool$eventDeliveriesGetEventDeliveriesPaged);
+  tool(tool$eventDeliveriesGetEventDelivery);
+  tool(tool$eventDeliveriesResendEventDelivery);
+  tool(tool$eventDeliveriesBatchRetryEventDelivery);
+  tool(tool$eventDeliveriesForceResendEventDeliveries);
+  tool(tool$deliveryAttemptsGetDeliveryAttempts);
+  tool(tool$deliveryAttemptsGetDeliveryAttempt);
+  tool(tool$eventsGetEventsPaged);
+  tool(tool$eventsCreateEndpointEvent);
+  tool(tool$eventsGetEndpointEvent);
+  tool(tool$eventsReplayEndpointEvent);
+  tool(tool$eventsBatchReplayEvents);
+  tool(tool$eventsCreateBroadcastEvent);
+  tool(tool$eventsCreateDynamicEvent);
+  tool(tool$eventsCreateEndpointFanoutEvent);
+  tool(tool$metaEventsGetMetaEventsPaged);
+  tool(tool$metaEventsGetMetaEvent);
+  tool(tool$metaEventsResendMetaEvent);
+  tool(tool$portalLinksLoadPortalLinksPaged);
+  tool(tool$portalLinksCreatePortalLink);
+  tool(tool$portalLinksGetPortalLink);
+  tool(tool$portalLinksGeneratePortalToken);
+  tool(tool$portalLinksUpdatePortalLink);
+  tool(tool$portalLinksRefreshPortalLinkAuthToken);
+  tool(tool$portalLinksRevokePortalLink);
+  tool(tool$sourcesLoadSourcesPaged);
+  tool(tool$sourcesCreateSource);
+  tool(tool$sourcesDeleteSource);
+  tool(tool$sourcesGetSource);
+  tool(tool$sourcesUpdateSource);
+  tool(tool$sourcesTestSourceFunction);
+  tool(tool$subscriptionsGetSubscriptions);
+  tool(tool$subscriptionsCreateSubscription);
+  tool(tool$subscriptionsDeleteSubscription);
+  tool(tool$subscriptionsGetSubscription);
+  tool(tool$subscriptionsUpdateSubscription);
+  tool(tool$subscriptionsTestSubscriptionFilter);
+  tool(tool$subscriptionsTestSubscriptionFunction);
+  tool(tool$filtersGetFilters);
+  tool(tool$filtersCreateFilter);
+  tool(tool$filtersDeleteFilter);
+  tool(tool$filtersGetFilter);
+  tool(tool$filtersUpdateFilter);
+  tool(tool$filtersBulkCreateFilters);
+  tool(tool$filtersBulkUpdateFilters);
+  tool(tool$filtersTestFilter);
 
-  return server;
+  return { server, tools };
 }

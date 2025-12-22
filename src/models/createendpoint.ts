@@ -25,21 +25,17 @@ export type CreateEndpoint = {
   url: string;
 };
 
-export const CreateEndpoint$zodSchema: z.ZodType<
-  CreateEndpoint,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const CreateEndpoint$zodSchema: z.ZodType<CreateEndpoint> = z.object({
   advanced_signatures: z.boolean().optional(),
   appID: z.string().optional(),
   authentication: EndpointAuthentication$zodSchema.optional(),
   description: z.string().optional(),
-  http_timeout: z.number().int().optional(),
+  http_timeout: z.int().optional(),
   is_disabled: z.boolean().optional(),
   name: z.string(),
   owner_id: z.string().optional(),
-  rate_limit: z.number().int().optional(),
-  rate_limit_duration: z.number().int().optional(),
+  rate_limit: z.int().optional(),
+  rate_limit_duration: z.int().optional(),
   secret: z.string().optional(),
   slack_webhook_url: z.string().optional(),
   support_email: z.string().optional(),

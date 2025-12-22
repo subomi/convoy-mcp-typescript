@@ -17,7 +17,7 @@ Model Context Protocol (MCP) Server for the *mcp* API.
 <!-- Start Summary [summary] -->
 ## Summary
 
-Convoy API Reference: Convoy is a fast and secure webhooks proxy. This document contains API specification.
+Convoy API Reference: Convoy is a fast and secure webhooks proxy. This document contains s API specification.
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
@@ -33,26 +33,24 @@ Convoy API Reference: Convoy is a fast and secure webhooks proxy. This document 
 <!-- Start Installation [installation] -->
 ## Installation
 
-> [!TIP]
-> To finish publishing your MCP Server to npm and others you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
 <details>
-<summary>DXT (Desktop Extension)</summary>
+<summary>MCP Bundle (Desktop Extension)</summary>
 
-Install the MCP server as a Desktop Extension using the pre-built [`mcp-server.dxt`](./mcp-server.dxt) file:
+Install the MCP server as a Desktop Extension using the pre-built [`mcp-server.mcpb`](https://github.com/subomi/convoy-mcp-typescript/releases/download/v0.4.0/mcp-server.mcpb) file:
 
-Simply drag and drop the [`mcp-server.dxt`](./mcp-server.dxt) file onto Claude Desktop to install the extension.
+Simply drag and drop the [`mcp-server.mcpb`](https://github.com/subomi/convoy-mcp-typescript/releases/download/v0.4.0/mcp-server.mcpb) file onto Claude Desktop to install the extension.
 
-The DXT package includes the MCP server and all necessary configuration. Once installed, the server will be available without additional setup.
+The MCP bundle package includes the MCP server and all necessary configuration. Once installed, the server will be available without additional setup.
 
 > [!NOTE]
-> DXT (Desktop Extensions) provide a streamlined way to package and distribute MCP servers. Learn more about [Desktop Extensions](https://www.anthropic.com/engineering/desktop-extensions).
+> MCP bundles provide a streamlined way to package and distribute MCP servers. Learn more about [Desktop Extensions](https://www.anthropic.com/engineering/desktop-extensions).
 
 </details>
 
 <details>
 <summary>Cursor</summary>
 
-[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=SDK&config=eyJtY3BTZXJ2ZXJzIjp7IlNESyI6eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyJtY3AiLCJzdGFydCIsIi0tYmVhcmVyLWF1dGgiLCIuLi4iXX19fQ==)
+[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=Convoy&config=eyJtY3BTZXJ2ZXJzIjp7IkNvbnZveSI6eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyJtY3AiLCJzdGFydCIsIi0tYmVhcmVyLWF1dGgiLCIuLi4iXX19fQ==)
 
 Or manually:
 
@@ -64,7 +62,7 @@ Or manually:
 ```json
 {
   "mcpServers": {
-    "SDK": {
+    "Convoy": {
       "command": "npx",
       "args": [
         "mcp",
@@ -100,7 +98,7 @@ Refer to [Official Windsurf documentation](https://docs.windsurf.com/windsurf/ca
 ```
 {
   "mcpServers": {
-    "SDK": {
+    "Convoy": {
       "command": "npx",
       "args": [
         "mcp",
@@ -124,7 +122,7 @@ Refer to [Official VS Code documentation](https://code.visualstudio.com/api/exte
 ```
 {
   "mcpServers": {
-    "SDK": {
+    "Convoy": {
       "command": "npx",
       "args": [
         "mcp",
@@ -153,7 +151,7 @@ Paste the following config in the configuration
 ```json
 {
   "mcpServers": {
-    "SDK": {
+    "Convoy": {
       "command": "npx",
       "args": [
         "mcp",

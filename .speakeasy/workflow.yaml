@@ -1,8 +1,11 @@
 workflowVersion: 1.0.0
+speakeasyVersion: latest
 sources:
     spec:
         inputs:
             - location: openapi.yaml
+        registry:
+            location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-self/spec
 targets:
     convoy-mcp-typescript:
         target: mcp-typescript

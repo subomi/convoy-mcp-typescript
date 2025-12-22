@@ -3,6 +3,15 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
+
+export const EndpointStatus = {
+  Active: "active",
+  Inactive: "inactive",
+  Pending: "pending",
+  Paused: "paused",
+} as const;
+export type EndpointStatus = ClosedEnum<typeof EndpointStatus>;
 
 export const EndpointStatus$zodSchema = z.enum([
   "active",
@@ -10,5 +19,3 @@ export const EndpointStatus$zodSchema = z.enum([
   "pending",
   "paused",
 ]);
-
-export type EndpointStatus = z.infer<typeof EndpointStatus$zodSchema>;

@@ -14,13 +14,13 @@ import {
   ServerNotification,
   ServerRequest,
 } from "@modelcontextprotocol/sdk/types.js";
-import { SDKCore } from "../core.js";
+import { ConvoyCore } from "../core.js";
 import { ConsoleLogger } from "./console-logger.js";
 import { MCPScope } from "./scopes.js";
 import { isAsyncIterable, isBinaryData, valueToBase64 } from "./shared.js";
 
 export type ReadResourceCallback = (
-  client: SDKCore,
+  client: ConvoyCore,
   uri: URL,
   extra: RequestHandlerExtra<ServerRequest, ServerNotification>,
 ) => ReadResourceResult | Promise<ReadResourceResult>;
@@ -35,7 +35,7 @@ export type ResourceDefinition = {
 };
 
 export type ReadResourceTemplateCallback = (
-  client: SDKCore,
+  client: ConvoyCore,
   uri: URL,
   vars: Variables,
   extra: RequestHandlerExtra<ServerRequest, ServerNotification>,
@@ -108,7 +108,7 @@ async function stringifySSEToJSON(
 export function createRegisterResource(
   logger: ConsoleLogger,
   server: McpServer,
-  getSDK: () => SDKCore,
+  getSDK: () => ConvoyCore,
   allowedScopes: Set<MCPScope>,
 ): (resource: ResourceDefinition) => void {
   return (resource: ResourceDefinition): void => {
@@ -143,7 +143,7 @@ export function createRegisterResource(
 export function createRegisterResourceTemplate(
   logger: ConsoleLogger,
   server: McpServer,
-  getSDK: () => SDKCore,
+  getSDK: () => ConvoyCore,
   allowedScopes: Set<MCPScope>,
 ): (resource: ResourceTemplateDefinition) => void {
   return (resource: ResourceTemplateDefinition): void => {

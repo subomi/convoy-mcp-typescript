@@ -12,14 +12,10 @@ export type PaginationData = {
   prev_page_cursor?: string | undefined;
 };
 
-export const PaginationData$zodSchema: z.ZodType<
-  PaginationData,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const PaginationData$zodSchema: z.ZodType<PaginationData> = z.object({
   has_next_page: z.boolean().optional(),
   has_prev_page: z.boolean().optional(),
   next_page_cursor: z.string().optional(),
-  per_page: z.number().int().optional(),
+  per_page: z.int().optional(),
   prev_page_cursor: z.string().optional(),
 });

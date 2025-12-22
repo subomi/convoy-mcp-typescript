@@ -28,18 +28,23 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 mcp-typescript:
-  version: 0.3.0
+  version: 0.4.0
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
     peerDependencies: {}
+  advancedFlags: []
   author: subomi
   baseErrorName: SDKError
   cloudflareEnabled: false
   defaultErrorName: SDKDefaultError
   flattenRequests: true
   flatteningOrder: body-first
+  formStringArrayEncodeMode: encoded-string
+  inferUnionDiscriminators: false
   inputModelSuffix: input
   maxMethodParams: 0
+  multipartArrayFormat: legacy
   outputModelSuffix: output
   packageName: mcp
+  responseFormat: envelope

@@ -13,12 +13,11 @@ export type Secret = {
   value?: string | undefined;
 };
 
-export const Secret$zodSchema: z.ZodType<Secret, z.ZodTypeDef, unknown> = z
-  .object({
-    created_at: z.string().optional(),
-    deleted_at: z.string().optional(),
-    expires_at: z.string().optional(),
-    uid: z.string().optional(),
-    updated_at: z.string().optional(),
-    value: z.string().optional(),
-  });
+export const Secret$zodSchema: z.ZodType<Secret> = z.object({
+  created_at: z.string().optional(),
+  deleted_at: z.string().optional(),
+  expires_at: z.string().optional(),
+  uid: z.string().optional(),
+  updated_at: z.string().optional(),
+  value: z.string().optional(),
+});
