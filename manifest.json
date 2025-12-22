@@ -1,0 +1,55 @@
+{
+  "dxt_version": "0.1",
+  "name": "mcp",
+  "version": "0.3.0",
+  "description": "",
+  "long_description": "Convoy API Reference: Convoy is a fast and secure webhooks proxy. This document contains API specification.",
+  "author": {
+    "name": "Speakeasy"
+  },
+  "server": {
+    "type": "node",
+    "entry_point": "./bin/mcp-server.js",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/bin/mcp-server.js",
+        "start",
+        "--bearer-auth",
+        "${user_config.bearer_auth}"
+      ]
+    }
+  },
+  "display_name": "Mcp",
+  "tools": [
+    {
+      "name": "get-all-endpoints",
+      "description": "List all endpoints\n\nThis endpoint fetches an endpoints"
+    },
+    {
+      "name": "endpoints-create-endpoint",
+      "description": "Create an endpoint\n\nThis endpoint creates an endpoint"
+    },
+    {
+      "name": "endpoints-get-endpoint",
+      "description": "Retrieve endpoint\n\nThis endpoint fetches an endpoint"
+    }
+  ],
+  "prompts": [],
+  "keywords": [
+      "mcp",
+      "convoy",
+      "api",
+      "reference",
+      "fast"
+    ],
+  "user_config": {
+      "bearer_auth": {
+        "type": "string",
+        "title": "BearerAuth",
+        "description": "The BearerAuth to use for the request",
+        "required": true,
+        "sensitive": true
+      }
+    }
+}
