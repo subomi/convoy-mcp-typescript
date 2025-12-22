@@ -5,14 +5,14 @@ management:
   docVersion: 24.1.4
   speakeasyVersion: 1.680.3
   generationVersion: 2.788.5
-  releaseVersion: 0.4.0
-  configChecksum: 2c960f199e60f33f50ef9983851575e7
+  releaseVersion: 0.5.0
+  configChecksum: 6122e2f6032812e15cc9b1c7c2c454f2
   repoURL: https://github.com/subomi/convoy-mcp-typescript.git
   published: true
 persistentEdits:
-  generation_id: 1cd45358-77be-4e76-b355-8cd31062fd73
-  pristine_commit_hash: eade1c3be210cc3441941e57879ff4e990694a11
-  pristine_tree_hash: 67ae8862ad62342667164a032067d242c87f55d7
+  generation_id: a8e2c8d9-9b7d-43e9-a6f1-12ae1766ce0b
+  pristine_commit_hash: e0aa492ff6d198635905b1b28c210ad702182561
+  pristine_tree_hash: 215b25007665f6940b54cf2444218eeb3a0a1cd2
 features:
   mcp-typescript:
     additionalDependencies: 0.1.0
@@ -46,12 +46,12 @@ trackedFiles:
     pristine_git_object: 4f9e60a9462fc4def738d60c3aaadf8232ef185f
   manifest.json:
     id: ca642a226869
-    last_write_checksum: sha1:4b96280ad4d09a874723bfd1502d22378f9f1542
-    pristine_git_object: b0fffb9922e87026f5df78d9374fe3d01921db1e
+    last_write_checksum: sha1:de3a8e3912fcfe4bcaec45b928c64d851738777d
+    pristine_git_object: c7b69bb02d42b6be1c3e907372006181e92e624a
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:c974232cfed8eeee55175aaaa133e3fb28ed5ce1
-    pristine_git_object: 0352ff3a81e71384cfc23284038374f9d65c59c7
+    last_write_checksum: sha1:6afed96bf430c9a2aaae5ed6e8b3ebf12a58c873
+    pristine_git_object: 133267f21996dadcb6889786da6371440e7da8dc
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:54de6603e68910822c88f94affe2ceff19378194
@@ -306,8 +306,8 @@ trackedFiles:
     pristine_git_object: d4bd8b341290e7a828a171d840bd0b0fff7c7cd7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:15607f1f5c3efb56d5e9ad4c9474df129b6097eb
-    pristine_git_object: 6a2d4b51362e284a62da7d7220f52e9f3a894d81
+    last_write_checksum: sha1:2c522947b492da9c71068972bc3a9a1a7e3211ab
+    pristine_git_object: ab7fb59436c5d6a510ad76513acf219cae0bbd20
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -390,8 +390,8 @@ trackedFiles:
     pristine_git_object: 78394e413ea070824f370b829eaf1416883e6680
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:b4bd3b2b3bddb32d07cdc57ef631e03afe71d90b
-    pristine_git_object: f2be11902effe973814a08012971b7bc7c811b97
+    last_write_checksum: sha1:68fbd17e30e28f606d53c3c5778b0aa7d39b192a
+    pristine_git_object: d8eee5c23797ddf470e1f290db5e1e62405b815e
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:cfbe18808e90e7ffec7951bf2932aa454d201801
@@ -406,8 +406,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:6a7d2cffac93904c910478a368d56d9897cc2355
-    pristine_git_object: 20cd5aa7b81a1504c0d0ce587115467f16cd7018
+    last_write_checksum: sha1:ffcc701b27a522926bfa52612fee6451d2d46a4e
+    pristine_git_object: 837e0b243953ef0a5ea476acee8d22593fb900e7
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:19c9034032819a14f15c430de4350c8aba99d725

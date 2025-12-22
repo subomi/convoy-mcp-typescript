@@ -36,9 +36,9 @@ Convoy API Reference: Convoy is a fast and secure webhooks proxy. This document 
 <details>
 <summary>MCP Bundle (Desktop Extension)</summary>
 
-Install the MCP server as a Desktop Extension using the pre-built [`mcp-server.mcpb`](https://github.com/subomi/convoy-mcp-typescript/releases/download/v0.4.0/mcp-server.mcpb) file:
+Install the MCP server as a Desktop Extension using the pre-built [`mcp-server.mcpb`](https://github.com/subomi/convoy-mcp-typescript/releases/download/v0.5.0/mcp-server.mcpb) file:
 
-Simply drag and drop the [`mcp-server.mcpb`](https://github.com/subomi/convoy-mcp-typescript/releases/download/v0.4.0/mcp-server.mcpb) file onto Claude Desktop to install the extension.
+Simply drag and drop the [`mcp-server.mcpb`](https://github.com/subomi/convoy-mcp-typescript/releases/download/v0.5.0/mcp-server.mcpb) file onto Claude Desktop to install the extension.
 
 The MCP bundle package includes the MCP server and all necessary configuration. Once installed, the server will be available without additional setup.
 
@@ -50,7 +50,7 @@ The MCP bundle package includes the MCP server and all necessary configuration. 
 <details>
 <summary>Cursor</summary>
 
-[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=Convoy&config=eyJtY3BTZXJ2ZXJzIjp7IkNvbnZveSI6eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyJtY3AiLCJzdGFydCIsIi0tYmVhcmVyLWF1dGgiLCIuLi4iXX19fQ==)
+[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=Convoy&config=eyJtY3BTZXJ2ZXJzIjp7IkNvbnZveSI6eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyJzdWJvbWkvY29udm95LW1jcC10eXBlc2NyaXB0Iiwic3RhcnQiLCItLWJlYXJlci1hdXRoIiwiLi4uIl19fX0=)
 
 Or manually:
 
@@ -65,7 +65,7 @@ Or manually:
     "Convoy": {
       "command": "npx",
       "args": [
-        "mcp",
+        "subomi/convoy-mcp-typescript",
         "start",
         "--bearer-auth",
         "..."
@@ -81,7 +81,7 @@ Or manually:
 <summary>Claude Code CLI</summary>
 
 ```bash
-claude mcp add mcp npx mcp start -- --bearer-auth ...
+claude mcp add subomi/convoy-mcp-typescript npx subomi/convoy-mcp-typescript start -- --bearer-auth ...
 ```
 
 </details>
@@ -101,7 +101,7 @@ Refer to [Official Windsurf documentation](https://docs.windsurf.com/windsurf/ca
     "Convoy": {
       "command": "npx",
       "args": [
-        "mcp",
+        "subomi/convoy-mcp-typescript",
         "start",
         "--bearer-auth",
         "..."
@@ -125,7 +125,7 @@ Refer to [Official VS Code documentation](https://code.visualstudio.com/api/exte
     "Convoy": {
       "command": "npx",
       "args": [
-        "mcp",
+        "subomi/convoy-mcp-typescript",
         "start",
         "--bearer-auth",
         "..."
@@ -154,7 +154,7 @@ Paste the following config in the configuration
     "Convoy": {
       "command": "npx",
       "args": [
-        "mcp",
+        "subomi/convoy-mcp-typescript",
         "start",
         "--bearer-auth",
         "..."
@@ -172,13 +172,13 @@ Paste the following config in the configuration
 To start the MCP server, run:
 
 ```bash
-npx mcp start --bearer-auth ...
+npx subomi/convoy-mcp-typescript start --bearer-auth ...
 ```
 
 For a full list of server arguments, run:
 
 ```
-npx mcp --help
+npx subomi/convoy-mcp-typescript --help
 ```
 
 </details>
