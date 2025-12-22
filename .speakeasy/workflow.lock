@@ -6,7 +6,7 @@ sources:
         sourceBlobDigest: sha256:5d0b83c4c8f072d10c68b81acc43378368fe64a2bbb06f2111c8b072974c51c0
         tags:
             - latest
-            - speakeasy-sdk-regen-1766408292
+            - speakeasy-sdk-regen-1766409104
             - 24.1.4
 targets:
     convoy-mcp-typescript:
