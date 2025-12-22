@@ -46,5 +46,5 @@ mcp-typescript:
   maxMethodParams: 0
   multipartArrayFormat: legacy
   outputModelSuffix: output
-  packageName: convoy-mcp-typescript
+  packageName: 'subomi/convoy-mcp-typescript'
   responseFormat: envelope
