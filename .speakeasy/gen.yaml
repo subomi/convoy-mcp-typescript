@@ -46,5 +46,5 @@ mcp-typescript:
   maxMethodParams: 0
   multipartArrayFormat: legacy
   outputModelSuffix: output
-  packageName: mcp
+  packageName: convoy-mcp-typescript
   responseFormat: envelope
