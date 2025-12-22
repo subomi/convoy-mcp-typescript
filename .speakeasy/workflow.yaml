@@ -1,0 +1,12 @@
+workflowVersion: 1.0.0
+sources:
+    spec:
+        inputs:
+            - location: openapi.yaml
+targets:
+    convoy-mcp-typescript:
+        target: mcp-typescript
+        source: spec
+        publish:
+            npm:
+                token: $npm_token
