@@ -1,6 +1,6 @@
 {
   "name": "@subomi/convoy-mcp-typescript",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "author": "subomi",
   "type": "module",
   "sideEffects": false,

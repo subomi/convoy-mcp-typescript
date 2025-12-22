@@ -1,7 +1,7 @@
 {
   "manifest_version": "0.3",
   "name": "@subomi/convoy-mcp-typescript",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "",
   "long_description": "Convoy API Reference: Convoy is a fast and secure webhooks proxy. This document contains s API specification.",
   "author": {
