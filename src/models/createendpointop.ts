@@ -15,14 +15,11 @@ export type CreateEndpointRequest = {
   CreateEndpoint: CreateEndpoint;
 };
 
-export const CreateEndpointRequest$zodSchema: z.ZodType<
-  CreateEndpointRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  CreateEndpoint: CreateEndpoint$zodSchema,
-  projectID: z.string().describe("Project ID"),
-});
+export const CreateEndpointRequest$zodSchema: z.ZodType<CreateEndpointRequest> =
+  z.object({
+    CreateEndpoint: CreateEndpoint$zodSchema,
+    projectID: z.string().describe("Project ID"),
+  });
 
 /**
  * Not Found
@@ -34,9 +31,7 @@ export type CreateEndpointNotFoundResponseBody = {
 };
 
 export const CreateEndpointNotFoundResponseBody$zodSchema: z.ZodType<
-  CreateEndpointNotFoundResponseBody,
-  z.ZodTypeDef,
-  unknown
+  CreateEndpointNotFoundResponseBody
 > = z.object({
   data: ObjectT$zodSchema.optional(),
   message: z.string().optional(),
@@ -53,9 +48,7 @@ export type CreateEndpointUnauthorizedResponseBody = {
 };
 
 export const CreateEndpointUnauthorizedResponseBody$zodSchema: z.ZodType<
-  CreateEndpointUnauthorizedResponseBody,
-  z.ZodTypeDef,
-  unknown
+  CreateEndpointUnauthorizedResponseBody
 > = z.object({
   data: ObjectT$zodSchema.optional(),
   message: z.string().optional(),
@@ -72,9 +65,7 @@ export type CreateEndpointBadRequestResponseBody = {
 };
 
 export const CreateEndpointBadRequestResponseBody$zodSchema: z.ZodType<
-  CreateEndpointBadRequestResponseBody,
-  z.ZodTypeDef,
-  unknown
+  CreateEndpointBadRequestResponseBody
 > = z.object({
   data: ObjectT$zodSchema.optional(),
   message: z.string().optional(),
@@ -91,9 +82,7 @@ export type CreateEndpointResponseBody = {
 };
 
 export const CreateEndpointResponseBody$zodSchema: z.ZodType<
-  CreateEndpointResponseBody,
-  z.ZodTypeDef,
-  unknown
+  CreateEndpointResponseBody
 > = z.object({
   data: EndpointResponse$zodSchema.optional(),
   message: z.string().optional(),
@@ -119,13 +108,11 @@ export type CreateEndpointResponse = {
 };
 
 export const CreateEndpointResponse$zodSchema: z.ZodType<
-  CreateEndpointResponse,
-  z.ZodTypeDef,
-  unknown
+  CreateEndpointResponse
 > = z.object({
   ContentType: z.string(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
+  RawResponse: z.custom<Response>(x => x instanceof Response),
+  StatusCode: z.int(),
   fourHundredAndFourApplicationJsonObject: z.lazy(() =>
     CreateEndpointNotFoundResponseBody$zodSchema
   ).optional(),

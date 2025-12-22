@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import {
   EndpointResponse,
   EndpointResponse$zodSchema,
@@ -10,27 +11,28 @@ import {
 import { ObjectT, ObjectT$zodSchema } from "./object.js";
 import { PaginationData, PaginationData$zodSchema } from "./paginationdata.js";
 
-export const Direction$zodSchema = z.enum([
+export const GetEndpointsDirection = {
+  Next: "next",
+  Prev: "prev",
+} as const;
+export type GetEndpointsDirection = ClosedEnum<typeof GetEndpointsDirection>;
+
+export const GetEndpointsDirection$zodSchema = z.enum([
   "next",
   "prev",
 ]);
 
-export type Direction = z.infer<typeof Direction$zodSchema>;
-
 export type CustomerIdSpecial = string | Array<string>;
 
-export const CustomerIdSpecial$zodSchema: z.ZodType<
-  CustomerIdSpecial,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.string(),
-  z.array(z.string()),
-]);
+export const CustomerIdSpecial$zodSchema: z.ZodType<CustomerIdSpecial> = z
+  .union([
+    z.string(),
+    z.array(z.string()),
+  ]);
 
 export type GetEndpointsRequest = {
   projectID: string;
-  direction?: Direction | undefined;
+  direction?: GetEndpointsDirection | undefined;
   next_page_cursor?: string | undefined;
   ownerId?: string | undefined;
   perPage?: number | undefined;
@@ -40,31 +42,28 @@ export type GetEndpointsRequest = {
   customer_id_special?: string | Array<string> | undefined;
 };
 
-export const GetEndpointsRequest$zodSchema: z.ZodType<
-  GetEndpointsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  customer_id_special: z.union([
-    z.string(),
-    z.array(z.string()),
-  ]).optional(),
-  direction: Direction$zodSchema.optional(),
-  next_page_cursor: z.string().describe(
-    "A pagination cursor to fetch the next page of a list",
-  ).optional(),
-  ownerId: z.string().describe("The owner ID of the endpoint").optional(),
-  perPage: z.number().int().describe("The number of items to return per page")
-    .optional(),
-  prev_page_cursor: z.string().describe(
-    "A pagination cursor to fetch the previous page of a list",
-  ).optional(),
-  projectID: z.string().describe("Project ID"),
-  q: z.string().describe("The name of the endpoint").optional(),
-  sort: z.string().describe(
-    "Sort order, values are `ASC` or `DESC`, defaults to `DESC`",
-  ).optional(),
-});
+export const GetEndpointsRequest$zodSchema: z.ZodType<GetEndpointsRequest> = z
+  .object({
+    customer_id_special: z.union([
+      z.string(),
+      z.array(z.string()),
+    ]).optional(),
+    direction: GetEndpointsDirection$zodSchema.optional(),
+    next_page_cursor: z.string().describe(
+      "A pagination cursor to fetch the next page of a list",
+    ).optional(),
+    ownerId: z.string().describe("The owner ID of the endpoint").optional(),
+    perPage: z.int().describe("The number of items to return per page")
+      .optional(),
+    prev_page_cursor: z.string().describe(
+      "A pagination cursor to fetch the previous page of a list",
+    ).optional(),
+    projectID: z.string().describe("Project ID"),
+    q: z.string().describe("The name of the endpoint").optional(),
+    sort: z.string().describe(
+      "Sort order, values are `ASC` or `DESC`, defaults to `DESC`",
+    ).optional(),
+  });
 
 /**
  * Not Found
@@ -76,9 +75,7 @@ export type GetEndpointsNotFoundResponseBody = {
 };
 
 export const GetEndpointsNotFoundResponseBody$zodSchema: z.ZodType<
-  GetEndpointsNotFoundResponseBody,
-  z.ZodTypeDef,
-  unknown
+  GetEndpointsNotFoundResponseBody
 > = z.object({
   data: ObjectT$zodSchema.optional(),
   message: z.string().optional(),
@@ -95,9 +92,7 @@ export type GetEndpointsUnauthorizedResponseBody = {
 };
 
 export const GetEndpointsUnauthorizedResponseBody$zodSchema: z.ZodType<
-  GetEndpointsUnauthorizedResponseBody,
-  z.ZodTypeDef,
-  unknown
+  GetEndpointsUnauthorizedResponseBody
 > = z.object({
   data: ObjectT$zodSchema.optional(),
   message: z.string().optional(),
@@ -114,24 +109,24 @@ export type GetEndpointsBadRequestResponseBody = {
 };
 
 export const GetEndpointsBadRequestResponseBody$zodSchema: z.ZodType<
-  GetEndpointsBadRequestResponseBody,
-  z.ZodTypeDef,
-  unknown
+  GetEndpointsBadRequestResponseBody
 > = z.object({
   data: ObjectT$zodSchema.optional(),
   message: z.string().optional(),
   status: z.boolean().optional(),
 }).describe("Bad Request");
 
-export type Data = {
+export type GetEndpointsData = {
   content?: Array<EndpointResponse> | undefined;
   pagination?: PaginationData | undefined;
 };
 
-export const Data$zodSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z.object({
-  content: z.array(EndpointResponse$zodSchema).optional(),
-  pagination: PaginationData$zodSchema.optional(),
-});
+export const GetEndpointsData$zodSchema: z.ZodType<GetEndpointsData> = z.object(
+  {
+    content: z.array(EndpointResponse$zodSchema).optional(),
+    pagination: PaginationData$zodSchema.optional(),
+  },
+);
 
 /**
  * OK
@@ -139,15 +134,13 @@ export const Data$zodSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z.object({
 export type GetEndpointsResponseBody = {
   message?: string | undefined;
   status?: boolean | undefined;
-  data?: Data | undefined;
+  data?: GetEndpointsData | undefined;
 };
 
 export const GetEndpointsResponseBody$zodSchema: z.ZodType<
-  GetEndpointsResponseBody,
-  z.ZodTypeDef,
-  unknown
+  GetEndpointsResponseBody
 > = z.object({
-  data: z.lazy(() => Data$zodSchema).optional(),
+  data: z.lazy(() => GetEndpointsData$zodSchema).optional(),
   message: z.string().optional(),
   status: z.boolean().optional(),
 }).describe("OK");
@@ -168,24 +161,21 @@ export type GetEndpointsResponse = {
     | undefined;
 };
 
-export const GetEndpointsResponse$zodSchema: z.ZodType<
-  GetEndpointsResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  ContentType: z.string(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
-  fourHundredAndFourApplicationJsonObject: z.lazy(() =>
-    GetEndpointsNotFoundResponseBody$zodSchema
-  ).optional(),
-  fourHundredAndOneApplicationJsonObject: z.lazy(() =>
-    GetEndpointsUnauthorizedResponseBody$zodSchema
-  ).optional(),
-  fourHundredApplicationJsonObject: z.lazy(() =>
-    GetEndpointsBadRequestResponseBody$zodSchema
-  ).optional(),
-  twoHundredApplicationJsonObject: z.lazy(() =>
-    GetEndpointsResponseBody$zodSchema
-  ).optional(),
-});
+export const GetEndpointsResponse$zodSchema: z.ZodType<GetEndpointsResponse> = z
+  .object({
+    ContentType: z.string(),
+    RawResponse: z.custom<Response>(x => x instanceof Response),
+    StatusCode: z.int(),
+    fourHundredAndFourApplicationJsonObject: z.lazy(() =>
+      GetEndpointsNotFoundResponseBody$zodSchema
+    ).optional(),
+    fourHundredAndOneApplicationJsonObject: z.lazy(() =>
+      GetEndpointsUnauthorizedResponseBody$zodSchema
+    ).optional(),
+    fourHundredApplicationJsonObject: z.lazy(() =>
+      GetEndpointsBadRequestResponseBody$zodSchema
+    ).optional(),
+    twoHundredApplicationJsonObject: z.lazy(() =>
+      GetEndpointsResponseBody$zodSchema
+    ).optional(),
+  });

@@ -33,29 +33,27 @@ export type EndpointResponse = {
   url: string;
 };
 
-export const EndpointResponse$zodSchema: z.ZodType<
-  EndpointResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  advanced_signatures: z.boolean().optional(),
-  authentication: EndpointAuthentication$zodSchema.optional(),
-  created_at: z.string().optional(),
-  deleted_at: z.string().optional(),
-  description: z.string().optional(),
-  events: z.number().int().optional(),
-  failure_rate: z.number().optional(),
-  http_timeout: z.number().int().optional(),
-  name: z.string(),
-  owner_id: z.string(),
-  project_id: z.string().optional(),
-  rate_limit: z.number().int().optional(),
-  rate_limit_duration: z.number().int().optional(),
-  secrets: z.array(Secret$zodSchema).optional(),
-  slack_webhook_url: z.string().optional(),
-  status: EndpointStatus$zodSchema.optional(),
-  support_email: z.string().optional(),
-  uid: z.string(),
-  updated_at: z.string().optional(),
-  url: z.string(),
-});
+export const EndpointResponse$zodSchema: z.ZodType<EndpointResponse> = z.object(
+  {
+    advanced_signatures: z.boolean().optional(),
+    authentication: EndpointAuthentication$zodSchema.optional(),
+    created_at: z.string().optional(),
+    deleted_at: z.string().optional(),
+    description: z.string().optional(),
+    events: z.int().optional(),
+    failure_rate: z.number().optional(),
+    http_timeout: z.int().optional(),
+    name: z.string(),
+    owner_id: z.string(),
+    project_id: z.string().optional(),
+    rate_limit: z.int().optional(),
+    rate_limit_duration: z.int().optional(),
+    secrets: z.array(Secret$zodSchema).optional(),
+    slack_webhook_url: z.string().optional(),
+    status: EndpointStatus$zodSchema.optional(),
+    support_email: z.string().optional(),
+    uid: z.string(),
+    updated_at: z.string().optional(),
+    url: z.string(),
+  },
+);

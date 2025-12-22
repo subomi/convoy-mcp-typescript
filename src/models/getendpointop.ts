@@ -11,14 +11,11 @@ import { ObjectT, ObjectT$zodSchema } from "./object.js";
 
 export type GetEndpointRequest = { projectID: string; endpointID: string };
 
-export const GetEndpointRequest$zodSchema: z.ZodType<
-  GetEndpointRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  endpointID: z.string().describe("Endpoint ID"),
-  projectID: z.string().describe("Project ID"),
-});
+export const GetEndpointRequest$zodSchema: z.ZodType<GetEndpointRequest> = z
+  .object({
+    endpointID: z.string().describe("Endpoint ID"),
+    projectID: z.string().describe("Project ID"),
+  });
 
 /**
  * Not Found
@@ -30,9 +27,7 @@ export type GetEndpointNotFoundResponseBody = {
 };
 
 export const GetEndpointNotFoundResponseBody$zodSchema: z.ZodType<
-  GetEndpointNotFoundResponseBody,
-  z.ZodTypeDef,
-  unknown
+  GetEndpointNotFoundResponseBody
 > = z.object({
   data: ObjectT$zodSchema.optional(),
   message: z.string().optional(),
@@ -49,9 +44,7 @@ export type GetEndpointUnauthorizedResponseBody = {
 };
 
 export const GetEndpointUnauthorizedResponseBody$zodSchema: z.ZodType<
-  GetEndpointUnauthorizedResponseBody,
-  z.ZodTypeDef,
-  unknown
+  GetEndpointUnauthorizedResponseBody
 > = z.object({
   data: ObjectT$zodSchema.optional(),
   message: z.string().optional(),
@@ -68,9 +61,7 @@ export type GetEndpointBadRequestResponseBody = {
 };
 
 export const GetEndpointBadRequestResponseBody$zodSchema: z.ZodType<
-  GetEndpointBadRequestResponseBody,
-  z.ZodTypeDef,
-  unknown
+  GetEndpointBadRequestResponseBody
 > = z.object({
   data: ObjectT$zodSchema.optional(),
   message: z.string().optional(),
@@ -87,9 +78,7 @@ export type GetEndpointResponseBody = {
 };
 
 export const GetEndpointResponseBody$zodSchema: z.ZodType<
-  GetEndpointResponseBody,
-  z.ZodTypeDef,
-  unknown
+  GetEndpointResponseBody
 > = z.object({
   data: EndpointResponse$zodSchema.optional(),
   message: z.string().optional(),
@@ -112,24 +101,21 @@ export type GetEndpointResponse = {
     | undefined;
 };
 
-export const GetEndpointResponse$zodSchema: z.ZodType<
-  GetEndpointResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  ContentType: z.string(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
-  fourHundredAndFourApplicationJsonObject: z.lazy(() =>
-    GetEndpointNotFoundResponseBody$zodSchema
-  ).optional(),
-  fourHundredAndOneApplicationJsonObject: z.lazy(() =>
-    GetEndpointUnauthorizedResponseBody$zodSchema
-  ).optional(),
-  fourHundredApplicationJsonObject: z.lazy(() =>
-    GetEndpointBadRequestResponseBody$zodSchema
-  ).optional(),
-  twoHundredApplicationJsonObject: z.lazy(() =>
-    GetEndpointResponseBody$zodSchema
-  ).optional(),
-});
+export const GetEndpointResponse$zodSchema: z.ZodType<GetEndpointResponse> = z
+  .object({
+    ContentType: z.string(),
+    RawResponse: z.custom<Response>(x => x instanceof Response),
+    StatusCode: z.int(),
+    fourHundredAndFourApplicationJsonObject: z.lazy(() =>
+      GetEndpointNotFoundResponseBody$zodSchema
+    ).optional(),
+    fourHundredAndOneApplicationJsonObject: z.lazy(() =>
+      GetEndpointUnauthorizedResponseBody$zodSchema
+    ).optional(),
+    fourHundredApplicationJsonObject: z.lazy(() =>
+      GetEndpointBadRequestResponseBody$zodSchema
+    ).optional(),
+    twoHundredApplicationJsonObject: z.lazy(() =>
+      GetEndpointResponseBody$zodSchema
+    ).optional(),
+  });

@@ -15,9 +15,7 @@ export type EndpointAuthentication = {
 };
 
 export const EndpointAuthentication$zodSchema: z.ZodType<
-  EndpointAuthentication,
-  z.ZodTypeDef,
-  unknown
+  EndpointAuthentication
 > = z.object({
   api_key: ApiKey$zodSchema.optional(),
   type: EndpointAuthenticationType$zodSchema.optional(),

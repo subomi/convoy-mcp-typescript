@@ -6,5 +6,4 @@ import * as z from "zod";
 
 export type ObjectT = {};
 
-export const ObjectT$zodSchema: z.ZodType<ObjectT, z.ZodTypeDef, unknown> = z
-  .object({});
+export const ObjectT$zodSchema: z.ZodType<ObjectT> = z.object({});

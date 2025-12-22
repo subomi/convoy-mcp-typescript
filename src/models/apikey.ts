@@ -4,13 +4,9 @@
 
 import * as z from "zod";
 
-export type ApiKey = {
-  header_name?: string | undefined;
-  header_value?: string | undefined;
-};
+export type ApiKey = { header_name: string; header_value: string };
 
-export const ApiKey$zodSchema: z.ZodType<ApiKey, z.ZodTypeDef, unknown> = z
-  .object({
-    header_name: z.string().optional(),
-    header_value: z.string().optional(),
-  });
+export const ApiKey$zodSchema: z.ZodType<ApiKey> = z.object({
+  header_name: z.string(),
+  header_value: z.string(),
+});

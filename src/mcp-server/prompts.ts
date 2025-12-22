@@ -3,40 +3,30 @@
  */
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import {
+  ShapeOutput,
+  ZodRawShapeCompat,
+} from "@modelcontextprotocol/sdk/server/zod-compat.js";
 import { RequestHandlerExtra } from "@modelcontextprotocol/sdk/shared/protocol.js";
 import {
   GetPromptResult,
   ServerNotification,
   ServerRequest,
 } from "@modelcontextprotocol/sdk/types.js";
-import {
-  objectOutputType,
-  ZodOptional,
-  ZodType,
-  ZodTypeAny,
-  ZodTypeDef,
-} from "zod";
-import { SDKCore } from "../core.js";
+import { ConvoyCore } from "../core.js";
 import { ConsoleLogger } from "./console-logger.js";
 import { MCPScope } from "./scopes.js";
 
-// '@modelcontextprotocol/sdk' currently does not export this type
-export type PromptArgsRawShape = {
-  [k: string]:
-    | ZodType<string, ZodTypeDef, string>
-    | ZodOptional<ZodType<string, ZodTypeDef, string>>;
-};
-
 export type PromptDefinition<
-  Args extends undefined | PromptArgsRawShape = undefined,
-> = Args extends PromptArgsRawShape ? {
+  Args extends undefined | ZodRawShapeCompat = undefined,
+> = Args extends ZodRawShapeCompat ? {
     name: string;
     description?: string;
     scopes?: MCPScope[];
     args: Args;
     prompt: (
-      client: SDKCore,
-      args: objectOutputType<Args, ZodTypeAny>,
+      client: ConvoyCore,
+      args: ShapeOutput<Args>,
       extra: RequestHandlerExtra<ServerRequest, ServerNotification>,
     ) => GetPromptResult | Promise<GetPromptResult>;
   }
@@ -46,7 +36,7 @@ export type PromptDefinition<
     scopes?: MCPScope[];
     args?: undefined;
     prompt: (
-      client: SDKCore,
+      client: ConvoyCore,
       extra: RequestHandlerExtra<ServerRequest, ServerNotification>,
     ) => GetPromptResult | Promise<GetPromptResult>;
   };
@@ -69,12 +59,12 @@ export async function formatResult(value: string): Promise<GetPromptResult> {
 export function createRegisterPrompt(
   logger: ConsoleLogger,
   server: McpServer,
-  getSDK: () => SDKCore,
+  getSDK: () => ConvoyCore,
   allowedScopes: Set<MCPScope>,
-): <A extends PromptArgsRawShape | undefined>(
+): <A extends ZodRawShapeCompat | undefined>(
   prompt: PromptDefinition<A>,
 ) => void {
-  return <A extends PromptArgsRawShape | undefined>(
+  return <A extends ZodRawShapeCompat | undefined>(
     prompt: PromptDefinition<A>,
   ): void => {
     const scopes = prompt.scopes ?? [];
