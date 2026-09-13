@@ -22,13 +22,27 @@ export type CreateSource = {
 };
 
 export const CreateSource$zodSchema: z.ZodType<CreateSource> = z.object({
-  body_function: z.string().optional(),
-  custom_response: CustomResponse$zodSchema.optional(),
-  header_function: z.string().optional(),
-  idempotency_keys: z.array(z.string()).optional(),
-  name: z.string().optional(),
-  provider: SourceProvider$zodSchema.optional(),
-  pub_sub: PubSubConfig$zodSchema.optional(),
-  type: SourceType$zodSchema.optional(),
-  verifier: VerifierConfig$zodSchema.optional(),
+  body_function: z.string().optional().describe(
+    "Function is a javascript function used to mutate the payload\nimmediately after ingesting an event",
+  ),
+  custom_response: CustomResponse$zodSchema.optional().describe(
+    "Custom response is used to define a custom response for incoming\nwebhooks project sources only.",
+  ),
+  header_function: z.string().optional().describe(
+    "Function is a javascript function used to mutate the headers\nimmediately after ingesting an event",
+  ),
+  idempotency_keys: z.array(z.string()).optional().describe(
+    "IdempotencyKeys are used to specify parts of a webhook request to uniquely\nidentify the event in an incoming webhooks project.",
+  ),
+  name: z.string().optional().describe("Source name."),
+  provider: SourceProvider$zodSchema.optional().describe(
+    "Use this to specify one of our predefined source types.",
+  ),
+  pub_sub: PubSubConfig$zodSchema.optional().describe(
+    "PubSub are used to specify message broker sources for outgoing\nwebhooks projects.",
+  ),
+  type: SourceType$zodSchema.optional().describe("Source Type."),
+  verifier: VerifierConfig$zodSchema.optional().describe(
+    "Verifiers are used to verify webhook events ingested in incoming\nwebhooks projects. If set, type is required and match the verifier\ntype object you choose.",
+  ),
 });

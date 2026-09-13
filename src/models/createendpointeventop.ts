@@ -14,7 +14,7 @@ export type CreateEndpointEventRequest = {
 export const CreateEndpointEventRequest$zodSchema: z.ZodType<
   CreateEndpointEventRequest
 > = z.object({
-  CreateEvent: CreateEvent$zodSchema,
+  CreateEvent: CreateEvent$zodSchema.describe("Event Details"),
   projectID: z.string().describe("Project ID"),
 });
 
@@ -107,19 +107,23 @@ export type CreateEndpointEventResponse = {
 export const CreateEndpointEventResponse$zodSchema: z.ZodType<
   CreateEndpointEventResponse
 > = z.object({
-  ContentType: z.string(),
-  RawResponse: z.custom<Response>(x => x instanceof Response),
-  StatusCode: z.int(),
+  ContentType: z.string().describe(
+    "HTTP response content type for this operation",
+  ),
+  RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+    "Raw HTTP response; suitable for custom response parsing",
+  ),
+  StatusCode: z.int().describe("HTTP response status code for this operation"),
   fourHundredAndFourApplicationJsonObject: z.lazy(() =>
     CreateEndpointEventNotFoundResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Not Found"),
   fourHundredAndOneApplicationJsonObject: z.lazy(() =>
     CreateEndpointEventUnauthorizedResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Unauthorized"),
   fourHundredApplicationJsonObject: z.lazy(() =>
     CreateEndpointEventBadRequestResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Bad Request"),
   twoHundredAndOneApplicationJsonObject: z.lazy(() =>
     CreateEndpointEventResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Created"),
 });
