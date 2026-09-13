@@ -13,8 +13,16 @@ export type UpdateFilterRequest = {
 
 export const UpdateFilterRequest$zodSchema: z.ZodType<UpdateFilterRequest> = z
   .object({
-    body: z.record(z.string(), z.any()).optional(),
-    event_type: z.string().optional(),
-    headers: z.record(z.string(), z.any()).optional(),
-    is_flattened: z.boolean().optional(),
+    body: z.record(z.string(), z.any()).optional().describe(
+      "Body matching criteria (optional)",
+    ),
+    event_type: z.string().optional().describe(
+      "Type of event this filter applies to (optional)",
+    ),
+    headers: z.record(z.string(), z.any()).optional().describe(
+      "Header matching criteria (optional)",
+    ),
+    is_flattened: z.boolean().optional().describe(
+      "Whether the filter uses flattened JSON paths (optional)",
+    ),
   });

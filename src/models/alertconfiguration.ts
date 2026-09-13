@@ -11,6 +11,6 @@ export type AlertConfiguration = {
 
 export const AlertConfiguration$zodSchema: z.ZodType<AlertConfiguration> = z
   .object({
-    count: z.int().optional(),
-    threshold: z.string().optional(),
+    count: z.int().optional().describe("Count"),
+    threshold: z.string().optional().describe("Threshold"),
   });

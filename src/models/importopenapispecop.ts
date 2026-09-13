@@ -21,7 +21,9 @@ export type ImportOpenApiSpecRequest = {
 export const ImportOpenApiSpecRequest$zodSchema: z.ZodType<
   ImportOpenApiSpecRequest
 > = z.object({
-  ImportOpenAPISpec: ImportOpenAPISpec$zodSchema,
+  ImportOpenAPISpec: ImportOpenAPISpec$zodSchema.describe(
+    "OpenAPI specification",
+  ),
   projectID: z.string().describe("Project ID"),
 });
 
@@ -112,19 +114,23 @@ export type ImportOpenApiSpecResponse = {
 export const ImportOpenApiSpecResponse$zodSchema: z.ZodType<
   ImportOpenApiSpecResponse
 > = z.object({
-  ContentType: z.string(),
-  RawResponse: z.custom<Response>(x => x instanceof Response),
-  StatusCode: z.int(),
+  ContentType: z.string().describe(
+    "HTTP response content type for this operation",
+  ),
+  RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+    "Raw HTTP response; suitable for custom response parsing",
+  ),
+  StatusCode: z.int().describe("HTTP response status code for this operation"),
   fourHundredAndFourApplicationJsonObject: z.lazy(() =>
     ImportOpenApiSpecNotFoundResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Not Found"),
   fourHundredAndOneApplicationJsonObject: z.lazy(() =>
     ImportOpenApiSpecUnauthorizedResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Unauthorized"),
   fourHundredApplicationJsonObject: z.lazy(() =>
     ImportOpenApiSpecBadRequestResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Bad Request"),
   twoHundredApplicationJsonObject: z.lazy(() =>
     ImportOpenApiSpecResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("OK"),
 });

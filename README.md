@@ -25,6 +25,7 @@ Convoy API Reference: Convoy is a fast and secure webhooks proxy. This document 
 <!-- $toc-max-depth=2 -->
 * [mcp](#mcp)
   * [Installation](#installation)
+  * [Progressive Discovery](#progressive-discovery)
   * [Development](#development)
   * [Contributions](#contributions)
 
@@ -34,11 +35,11 @@ Convoy API Reference: Convoy is a fast and secure webhooks proxy. This document 
 ## Installation
 
 <details>
-<summary>MCP Bundle (Desktop Extension)</summary>
+<summary>Claude Desktop</summary>
 
-Install the MCP server as a Desktop Extension using the pre-built [`mcp-server.mcpb`](https://github.com/subomi/convoy-mcp-typescript/releases/download/v0.7.0/mcp-server.mcpb) file:
+Install the MCP server as a Desktop Extension using the pre-built [`mcp-server.mcpb`](https://github.com/subomi/convoy-mcp-typescript/releases/download/v0.8.0/mcp-server.mcpb) file:
 
-Simply drag and drop the [`mcp-server.mcpb`](https://github.com/subomi/convoy-mcp-typescript/releases/download/v0.7.0/mcp-server.mcpb) file onto Claude Desktop to install the extension.
+Simply drag and drop the [`mcp-server.mcpb`](https://github.com/subomi/convoy-mcp-typescript/releases/download/v0.8.0/mcp-server.mcpb) file onto Claude Desktop to install the extension.
 
 The MCP bundle package includes the MCP server and all necessary configuration. Once installed, the server will be available without additional setup.
 
@@ -50,7 +51,7 @@ The MCP bundle package includes the MCP server and all necessary configuration. 
 <details>
 <summary>Cursor</summary>
 
-[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=Convoy&config=eyJtY3BTZXJ2ZXJzIjp7IkNvbnZveSI6eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyJAc3Vib21pL2NvbnZveS1tY3AtdHlwZXNjcmlwdCIsInN0YXJ0IiwiLS1iZWFyZXItYXV0aCIsIi4uLiJdfX19)
+[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=Convoy&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyJAc3Vib21pL2NvbnZveS1tY3AtdHlwZXNjcmlwdCIsInN0YXJ0IiwiLS1iZWFyZXItYXV0aCIsIiJdfQ==)
 
 Or manually:
 
@@ -61,17 +62,13 @@ Or manually:
 
 ```json
 {
-  "mcpServers": {
-    "Convoy": {
-      "command": "npx",
-      "args": [
-        "@subomi/convoy-mcp-typescript",
-        "start",
-        "--bearer-auth",
-        "..."
-      ]
-    }
-  }
+  "command": "npx",
+  "args": [
+    "@subomi/convoy-mcp-typescript",
+    "start",
+    "--bearer-auth",
+    ""
+  ]
 }
 ```
 
@@ -81,7 +78,15 @@ Or manually:
 <summary>Claude Code CLI</summary>
 
 ```bash
-claude mcp add @subomi/convoy-mcp-typescript npx @subomi/convoy-mcp-typescript start -- --bearer-auth ...
+claude mcp add Convoy -- npx -y @subomi/convoy-mcp-typescript start --bearer-auth 
+```
+
+</details>
+<details>
+<summary>Gemini</summary>
+
+```bash
+gemini mcp add Convoy -- npx -y @subomi/convoy-mcp-typescript start --bearer-auth 
 ```
 
 </details>
@@ -95,84 +100,51 @@ Refer to [Official Windsurf documentation](https://docs.windsurf.com/windsurf/ca
 3. Click on `Manage MCPs`. (To Manage MCPs you should be signed in with a Windsurf Account)
 4. Click on `View raw config` to open up the mcp configuration file.
 5. If the configuration file is empty paste the full json
-```
+
+```bash
 {
-  "mcpServers": {
-    "Convoy": {
-      "command": "npx",
-      "args": [
-        "@subomi/convoy-mcp-typescript",
-        "start",
-        "--bearer-auth",
-        "..."
-      ]
-    }
-  }
+  "command": "npx",
+  "args": [
+    "@subomi/convoy-mcp-typescript",
+    "start",
+    "--bearer-auth",
+    ""
+  ]
 }
 ```
 </details>
 <details>
 <summary>VS Code</summary>
 
+[![Install in VS Code](https://img.shields.io/badge/VS_Code-VS_Code?style=flat-square&label=Install%20Convoy%20MCP&color=0098FF)](vscode://ms-vscode.vscode-mcp/install?name=Convoy&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyJAc3Vib21pL2NvbnZveS1tY3AtdHlwZXNjcmlwdCIsInN0YXJ0IiwiLS1iZWFyZXItYXV0aCIsIiJdfQ==)
+
+Or manually:
+
 Refer to [Official VS Code documentation](https://code.visualstudio.com/api/extension-guides/ai/mcp) for latest information
 
 1. Open [Command Palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette)
 1. Search and open `MCP: Open User Configuration`. This should open mcp.json file
 2. If the configuration file is empty paste the full json
-```
+
+```bash
 {
-  "mcpServers": {
-    "Convoy": {
-      "command": "npx",
-      "args": [
-        "@subomi/convoy-mcp-typescript",
-        "start",
-        "--bearer-auth",
-        "..."
-      ]
-    }
-  }
+  "command": "npx",
+  "args": [
+    "@subomi/convoy-mcp-typescript",
+    "start",
+    "--bearer-auth",
+    ""
+  ]
 }
 ```
 
 </details>
-<details>
-<summary>Claude Desktop</summary>
-Claude Desktop doesn't yet support SSE/remote MCP servers.
-
-You need to do the following
-1. Open claude Desktop
-2. Open left hand side pane, then click on your Username
-3. Go to `Settings`
-4. Go to `Developer` tab (on the left hand side)
-5. Click on `Edit Config`
-Paste the following config in the configuration
-
-```json
-{
-  "mcpServers": {
-    "Convoy": {
-      "command": "npx",
-      "args": [
-        "@subomi/convoy-mcp-typescript",
-        "start",
-        "--bearer-auth",
-        "..."
-      ]
-    }
-  }
-}
-```
-
-</details>
-
-
 <details>
 <summary> Stdio installation via npm </summary>
 To start the MCP server, run:
 
 ```bash
-npx @subomi/convoy-mcp-typescript start --bearer-auth ...
+npx @subomi/convoy-mcp-typescript start --bearer-auth 
 ```
 
 For a full list of server arguments, run:
@@ -183,6 +155,34 @@ npx @subomi/convoy-mcp-typescript --help
 
 </details>
 <!-- End Installation [installation] -->
+
+<!-- Start Progressive Discovery [dynamic-mode] -->
+## Progressive Discovery
+
+MCP servers with many tools can bloat LLM context windows, leading to increased token usage and tool confusion. Dynamic mode solves this by exposing only a small set of meta-tools that let agents progressively discover and invoke tools on demand.
+
+To enable dynamic mode, pass the `--mode dynamic` flag when starting your server:
+
+```jsonc
+{
+  "mcpServers": {
+    "Convoy": {
+      "command": "npx",
+      "args": ["@subomi/convoy-mcp-typescript", "start", "--mode", "dynamic"],
+      // ... other server arguments
+    }
+  }
+}
+```
+
+In dynamic mode, the server registers only the following meta-tools instead of every individual tool:
+
+- **`list_tools`**: Lists all available tools with their names and descriptions.
+- **`describe_tool_input`**: Returns the input schema for one or more tools by name.
+- **`execute_tool`**: Executes a tool by name with its arguments.
+
+This approach significantly reduces the number of tokens sent to the LLM on each request, which is especially useful for servers with a large number of tools.
+<!-- End Progressive Discovery [dynamic-mode] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

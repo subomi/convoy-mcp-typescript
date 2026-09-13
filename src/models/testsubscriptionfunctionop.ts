@@ -21,7 +21,7 @@ export type TestSubscriptionFunctionRequest = {
 export const TestSubscriptionFunctionRequest$zodSchema: z.ZodType<
   TestSubscriptionFunctionRequest
 > = z.object({
-  FunctionRequest: FunctionRequest$zodSchema,
+  FunctionRequest: FunctionRequest$zodSchema.describe("Function Details"),
   projectID: z.string().describe("Project ID"),
 });
 
@@ -112,19 +112,23 @@ export type TestSubscriptionFunctionResponse = {
 export const TestSubscriptionFunctionResponse$zodSchema: z.ZodType<
   TestSubscriptionFunctionResponse
 > = z.object({
-  ContentType: z.string(),
-  RawResponse: z.custom<Response>(x => x instanceof Response),
-  StatusCode: z.int(),
+  ContentType: z.string().describe(
+    "HTTP response content type for this operation",
+  ),
+  RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+    "Raw HTTP response; suitable for custom response parsing",
+  ),
+  StatusCode: z.int().describe("HTTP response status code for this operation"),
   fourHundredAndFourApplicationJsonObject: z.lazy(() =>
     TestSubscriptionFunctionNotFoundResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Not Found"),
   fourHundredAndOneApplicationJsonObject: z.lazy(() =>
     TestSubscriptionFunctionUnauthorizedResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Unauthorized"),
   fourHundredApplicationJsonObject: z.lazy(() =>
     TestSubscriptionFunctionBadRequestResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Bad Request"),
   twoHundredApplicationJsonObject: z.lazy(() =>
     TestSubscriptionFunctionResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("OK"),
 });

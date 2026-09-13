@@ -103,19 +103,25 @@ export type PauseEndpointResponse = {
 
 export const PauseEndpointResponse$zodSchema: z.ZodType<PauseEndpointResponse> =
   z.object({
-    ContentType: z.string(),
-    RawResponse: z.custom<Response>(x => x instanceof Response),
-    StatusCode: z.int(),
+    ContentType: z.string().describe(
+      "HTTP response content type for this operation",
+    ),
+    RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+      "Raw HTTP response; suitable for custom response parsing",
+    ),
+    StatusCode: z.int().describe(
+      "HTTP response status code for this operation",
+    ),
     fourHundredAndFourApplicationJsonObject: z.lazy(() =>
       PauseEndpointNotFoundResponseBody$zodSchema
-    ).optional(),
+    ).optional().describe("Not Found"),
     fourHundredAndOneApplicationJsonObject: z.lazy(() =>
       PauseEndpointUnauthorizedResponseBody$zodSchema
-    ).optional(),
+    ).optional().describe("Unauthorized"),
     fourHundredApplicationJsonObject: z.lazy(() =>
       PauseEndpointBadRequestResponseBody$zodSchema
-    ).optional(),
+    ).optional().describe("Bad Request"),
     twoHundredAndTwoApplicationJsonObject: z.lazy(() =>
       PauseEndpointResponseBody$zodSchema
-    ).optional(),
+    ).optional().describe("Accepted"),
   });
