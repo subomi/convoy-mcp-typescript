@@ -18,7 +18,7 @@ export type CreatePortalLinkRequest = {
 export const CreatePortalLinkRequest$zodSchema: z.ZodType<
   CreatePortalLinkRequest
 > = z.object({
-  PortalLink: PortalLink$zodSchema,
+  PortalLink: PortalLink$zodSchema.describe("Portal Link Details"),
   projectID: z.string().describe("Project ID"),
 });
 
@@ -111,19 +111,23 @@ export type CreatePortalLinkResponse = {
 export const CreatePortalLinkResponse$zodSchema: z.ZodType<
   CreatePortalLinkResponse
 > = z.object({
-  ContentType: z.string(),
-  RawResponse: z.custom<Response>(x => x instanceof Response),
-  StatusCode: z.int(),
+  ContentType: z.string().describe(
+    "HTTP response content type for this operation",
+  ),
+  RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+    "Raw HTTP response; suitable for custom response parsing",
+  ),
+  StatusCode: z.int().describe("HTTP response status code for this operation"),
   fourHundredAndFourApplicationJsonObject: z.lazy(() =>
     CreatePortalLinkNotFoundResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Not Found"),
   fourHundredAndOneApplicationJsonObject: z.lazy(() =>
     CreatePortalLinkUnauthorizedResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Unauthorized"),
   fourHundredApplicationJsonObject: z.lazy(() =>
     CreatePortalLinkBadRequestResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Bad Request"),
   twoHundredAndOneApplicationJsonObject: z.lazy(() =>
     CreatePortalLinkResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Created"),
 });

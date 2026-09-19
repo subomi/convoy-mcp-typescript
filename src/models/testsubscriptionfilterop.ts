@@ -14,7 +14,7 @@ export type TestSubscriptionFilterRequest = {
 export const TestSubscriptionFilterRequest$zodSchema: z.ZodType<
   TestSubscriptionFilterRequest
 > = z.object({
-  TestFilter: TestFilter$zodSchema,
+  TestFilter: TestFilter$zodSchema.describe("Filter Details"),
   projectID: z.string().describe("Project ID"),
 });
 
@@ -106,19 +106,23 @@ export type TestSubscriptionFilterResponse = {
 export const TestSubscriptionFilterResponse$zodSchema: z.ZodType<
   TestSubscriptionFilterResponse
 > = z.object({
-  ContentType: z.string(),
-  RawResponse: z.custom<Response>(x => x instanceof Response),
-  StatusCode: z.int(),
+  ContentType: z.string().describe(
+    "HTTP response content type for this operation",
+  ),
+  RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+    "Raw HTTP response; suitable for custom response parsing",
+  ),
+  StatusCode: z.int().describe("HTTP response status code for this operation"),
   fourHundredAndFourApplicationJsonObject: z.lazy(() =>
     TestSubscriptionFilterNotFoundResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Not Found"),
   fourHundredAndOneApplicationJsonObject: z.lazy(() =>
     TestSubscriptionFilterUnauthorizedResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Unauthorized"),
   fourHundredApplicationJsonObject: z.lazy(() =>
     TestSubscriptionFilterBadRequestResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Bad Request"),
   twoHundredApplicationJsonObject: z.lazy(() =>
     TestSubscriptionFilterResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("OK"),
 });
