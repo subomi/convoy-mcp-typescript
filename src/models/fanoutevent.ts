@@ -15,8 +15,7 @@ export type FanoutEventData = {};
 export const FanoutEventData$zodSchema: z.ZodType<FanoutEventData> = z.object(
   {},
 ).describe(
-  "Data is an arbitrary JSON value that gets sent as the body of the\n"
-    + "webhook to the endpoints",
+  "Data is an arbitrary JSON value that gets sent as the body of the\nwebhook to the endpoints",
 );
 
 export type FanoutEvent = {
@@ -28,9 +27,19 @@ export type FanoutEvent = {
 };
 
 export const FanoutEvent$zodSchema: z.ZodType<FanoutEvent> = z.object({
-  custom_headers: z.record(z.string(), z.string()).optional(),
-  data: z.lazy(() => FanoutEventData$zodSchema).optional(),
-  event_type: z.string().optional(),
-  idempotency_key: z.string().optional(),
-  owner_id: z.string().optional(),
+  custom_headers: z.record(z.string(), z.string()).optional().describe(
+    "Specifies custom headers you want convoy to add when the event is dispatched to your endpoint",
+  ),
+  data: z.lazy(() => FanoutEventData$zodSchema).optional().describe(
+    "Data is an arbitrary JSON value that gets sent as the body of the\nwebhook to the endpoints",
+  ),
+  event_type: z.string().optional().describe(
+    "Event Type is used for filtering and debugging e.g invoice.paid",
+  ),
+  idempotency_key: z.string().optional().describe(
+    "Specify a key for event deduplication",
+  ),
+  owner_id: z.string().optional().describe(
+    "Used for fanout, sends this event to all endpoints with this OwnerID.",
+  ),
 });

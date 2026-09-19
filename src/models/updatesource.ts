@@ -25,14 +25,30 @@ export type UpdateSource = {
 };
 
 export const UpdateSource$zodSchema: z.ZodType<UpdateSource> = z.object({
-  body_function: z.string().optional(),
-  custom_response: UpdateCustomResponse$zodSchema.optional(),
-  forward_headers: z.array(z.string()).optional(),
-  header_function: z.string().optional(),
-  idempotency_keys: z.array(z.string()).optional(),
-  is_disabled: z.boolean().optional(),
-  name: z.string().optional(),
-  pub_sub: PubSubConfig$zodSchema.optional(),
-  type: SourceType$zodSchema.optional(),
-  verifier: VerifierConfig$zodSchema.optional(),
+  body_function: z.string().optional().describe(
+    "Function is a javascript function used to mutate the payload\nimmediately after ingesting an event",
+  ),
+  custom_response: UpdateCustomResponse$zodSchema.optional().describe(
+    "Custom response is used to define a custom response for incoming\nwebhooks project sources only.",
+  ),
+  forward_headers: z.array(z.string()).optional().describe(
+    "Soecfy header you want convoy to save from the ingest request and forward to your endpoints when the event is dispatched.",
+  ),
+  header_function: z.string().optional().describe(
+    "Function is a javascript function used to mutate the headers\nimmediately after ingesting an event",
+  ),
+  idempotency_keys: z.array(z.string()).optional().describe(
+    "IdempotencyKeys are used to specify parts of a webhook request to uniquely\nidentify the event in an incoming webhooks project.",
+  ),
+  is_disabled: z.boolean().optional().describe(
+    "This is used to manually enable/disable the source.",
+  ),
+  name: z.string().optional().describe("Source name."),
+  pub_sub: PubSubConfig$zodSchema.optional().describe(
+    "PubSub are used to specify message broker sources for outgoing\nwebhooks projects, you only need to specify this when the source type is `pub_sub`.",
+  ),
+  type: SourceType$zodSchema.optional().describe("Source Type."),
+  verifier: VerifierConfig$zodSchema.optional().describe(
+    "Verifiers are used to verify webhook events ingested in incoming\nwebhooks projects.  If set, type is required and match the verifier\ntype object you choose.",
+  ),
 });
