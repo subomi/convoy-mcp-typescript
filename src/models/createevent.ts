@@ -15,8 +15,7 @@ export type CreateEventData = {};
 export const CreateEventData$zodSchema: z.ZodType<CreateEventData> = z.object(
   {},
 ).describe(
-  "Data is an arbitrary JSON value that gets sent as the body of the\n"
-    + "webhook to the endpoints",
+  "Data is an arbitrary JSON value that gets sent as the body of the\nwebhook to the endpoints",
 );
 
 export type CreateEvent = {
@@ -29,10 +28,22 @@ export type CreateEvent = {
 };
 
 export const CreateEvent$zodSchema: z.ZodType<CreateEvent> = z.object({
-  app_id: z.string().optional(),
-  custom_headers: z.record(z.string(), z.string()).optional(),
-  data: z.lazy(() => CreateEventData$zodSchema).optional(),
-  endpoint_id: z.string().optional(),
-  event_type: z.string().optional(),
-  idempotency_key: z.string().optional(),
+  app_id: z.string().optional().describe(
+    "Deprecated but necessary for backward compatibility.",
+  ),
+  custom_headers: z.record(z.string(), z.string()).optional().describe(
+    "Specifies custom headers you want convoy to add when the event is dispatched to your endpoint",
+  ),
+  data: z.lazy(() => CreateEventData$zodSchema).optional().describe(
+    "Data is an arbitrary JSON value that gets sent as the body of the\nwebhook to the endpoints",
+  ),
+  endpoint_id: z.string().optional().describe(
+    "Specifies the endpoint to send this event to.",
+  ),
+  event_type: z.string().optional().describe(
+    "Event Type is used for filtering and debugging e.g invoice.paid",
+  ),
+  idempotency_key: z.string().optional().describe(
+    "Specify a key for event deduplication",
+  ),
 });

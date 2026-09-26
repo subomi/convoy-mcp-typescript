@@ -12,6 +12,8 @@ export type FilterConfiguration = {
 
 export const FilterConfiguration$zodSchema: z.ZodType<FilterConfiguration> = z
   .object({
-    event_types: z.array(z.string()).optional(),
-    filter: Fs$zodSchema.optional(),
+    event_types: z.array(z.string()).optional().describe(
+      "List of event types that the subscription should match",
+    ),
+    filter: Fs$zodSchema.optional().describe("Body & Header filters"),
   });
