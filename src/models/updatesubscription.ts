@@ -58,14 +58,28 @@ export type UpdateSubscription = {
 
 export const UpdateSubscription$zodSchema: z.ZodType<UpdateSubscription> = z
   .object({
-    alert_config: AlertConfiguration$zodSchema.optional(),
-    app_id: z.string().optional(),
-    delivery_mode: UpdateSubscriptionDeliveryMode$zodSchema.optional(),
-    endpoint_id: z.string().optional(),
-    filter_config: FilterConfiguration$zodSchema.optional(),
-    function: z.string().optional(),
-    name: z.string().optional(),
-    rate_limit_config: RateLimitConfiguration$zodSchema.optional(),
-    retry_config: RetryConfiguration$zodSchema.optional(),
-    source_id: z.string().optional(),
+    alert_config: AlertConfiguration$zodSchema.optional().describe(
+      "Alert configuration",
+    ),
+    app_id: z.string().optional().describe(
+      "Deprecated but necessary for backward compatibility",
+    ),
+    delivery_mode: UpdateSubscriptionDeliveryMode$zodSchema.optional().describe(
+      "Delivery mode configuration",
+    ),
+    endpoint_id: z.string().optional().describe("Destination endpoint ID"),
+    filter_config: FilterConfiguration$zodSchema.optional().describe(
+      "Filter configuration",
+    ),
+    function: z.string().optional().describe(
+      "Convoy supports mutating your request payload using a js function. Use this field\nto specify a `transform` function for this purpose. See this[https://docs.getconvoy.io/product-manual/subscriptions#functions] for more",
+    ),
+    name: z.string().optional().describe("Subscription Nme"),
+    rate_limit_config: RateLimitConfiguration$zodSchema.optional().describe(
+      "Rate limit configuration",
+    ),
+    retry_config: RetryConfiguration$zodSchema.optional().describe(
+      "Retry configuration",
+    ),
+    source_id: z.string().optional().describe("Source Id"),
   });

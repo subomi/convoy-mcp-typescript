@@ -12,7 +12,11 @@ import {
   createRegisterResourceTemplate,
 } from "./resources.js";
 import { MCPScope } from "./scopes.js";
-import { createRegisterTool } from "./tools.js";
+import {
+  createRegisterTool,
+  MCPToolAnnotationFilter,
+  registerDynamicTools,
+} from "./tools.js";
 import { tool$deliveryAttemptsGetDeliveryAttempt } from "./tools/deliveryAttemptsGetDeliveryAttempt.js";
 import { tool$deliveryAttemptsGetDeliveryAttempts } from "./tools/deliveryAttemptsGetDeliveryAttempts.js";
 import { tool$endpointsActivateEndpoint } from "./tools/endpointsActivateEndpoint.js";
@@ -76,7 +80,9 @@ import { tool$subscriptionsUpdateSubscription } from "./tools/subscriptionsUpdat
 export function createMCPServer(deps: {
   logger: ConsoleLogger;
   allowedTools?: string[] | undefined;
+  dynamic?: boolean | undefined;
   scopes?: MCPScope[] | undefined;
+  annotationFilter?: MCPToolAnnotationFilter | undefined;
   getSDK?: () => ConvoyCore;
   serverURL?: string | undefined;
   security?: SDKOptions["security"] | undefined;
@@ -84,7 +90,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Convoy",
-    version: "0.7.0",
+    version: "0.8.0",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -104,12 +110,14 @@ export function createMCPServer(deps: {
   const scopes = new Set(deps.scopes);
 
   const allowedTools = deps.allowedTools && new Set(deps.allowedTools);
-  const [tool, tools] = createRegisterTool(
+  const [tool, tools, toolMap] = createRegisterTool(
     deps.logger,
     server,
     getClient,
     scopes,
     allowedTools,
+    deps.dynamic,
+    deps.annotationFilter,
   );
   const resource = createRegisterResource(
     deps.logger,
@@ -186,6 +194,10 @@ export function createMCPServer(deps: {
   tool(tool$filtersBulkCreateFilters);
   tool(tool$filtersBulkUpdateFilters);
   tool(tool$filtersTestFilter);
+
+  if (deps.dynamic) {
+    registerDynamicTools(deps.logger, server, getClient, toolMap, scopes);
+  }
 
   return { server, tools };
 }
