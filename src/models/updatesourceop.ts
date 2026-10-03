@@ -15,7 +15,7 @@ export type UpdateSourceRequest = {
 
 export const UpdateSourceRequest$zodSchema: z.ZodType<UpdateSourceRequest> = z
   .object({
-    UpdateSource: UpdateSource$zodSchema,
+    UpdateSource: UpdateSource$zodSchema.describe("Source Details"),
     projectID: z.string().describe("Project ID"),
     sourceID: z.string().describe("source id"),
   });
@@ -106,19 +106,25 @@ export type UpdateSourceResponse = {
 
 export const UpdateSourceResponse$zodSchema: z.ZodType<UpdateSourceResponse> = z
   .object({
-    ContentType: z.string(),
-    RawResponse: z.custom<Response>(x => x instanceof Response),
-    StatusCode: z.int(),
+    ContentType: z.string().describe(
+      "HTTP response content type for this operation",
+    ),
+    RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+      "Raw HTTP response; suitable for custom response parsing",
+    ),
+    StatusCode: z.int().describe(
+      "HTTP response status code for this operation",
+    ),
     fourHundredAndFourApplicationJsonObject: z.lazy(() =>
       UpdateSourceNotFoundResponseBody$zodSchema
-    ).optional(),
+    ).optional().describe("Not Found"),
     fourHundredAndOneApplicationJsonObject: z.lazy(() =>
       UpdateSourceUnauthorizedResponseBody$zodSchema
-    ).optional(),
+    ).optional().describe("Unauthorized"),
     fourHundredApplicationJsonObject: z.lazy(() =>
       UpdateSourceBadRequestResponseBody$zodSchema
-    ).optional(),
+    ).optional().describe("Bad Request"),
     twoHundredAndTwoApplicationJsonObject: z.lazy(() =>
       UpdateSourceResponseBody$zodSchema
-    ).optional(),
+    ).optional().describe("Accepted"),
   });

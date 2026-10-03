@@ -13,6 +13,8 @@ generation:
     requestResponseComponentNamesFeb2024: true
     securityFeb2025: true
     sharedErrorComponentsApr2025: true
+    sharedNestedComponentsJan2026: false
+    nameOverrideFeb2026: false
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
@@ -22,13 +24,14 @@ generation:
   schemas:
     allOfMergeStrategy: shallowMerge
   requestBodyFieldName: ""
+  versioningStrategy: automatic
   persistentEdits: {}
   tests:
     generateTests: false
     generateNewTests: true
     skipResponseBodyAssertions: false
 mcp-typescript:
-  version: 0.7.0
+  version: 0.8.0
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -38,9 +41,11 @@ mcp-typescript:
   baseErrorName: SDKError
   cloudflareEnabled: false
   defaultErrorName: SDKDefaultError
+  fixEnumNameSanitization: false
   flattenRequests: true
   flatteningOrder: body-first
   formStringArrayEncodeMode: encoded-string
+  gramEnabled: false
   inferUnionDiscriminators: false
   inputModelSuffix: input
   maxMethodParams: 0
@@ -48,3 +53,4 @@ mcp-typescript:
   outputModelSuffix: output
   packageName: '@subomi/convoy-mcp-typescript'
   responseFormat: envelope
+  validateResponse: true

@@ -107,19 +107,23 @@ export type ActivateEndpointResponse = {
 export const ActivateEndpointResponse$zodSchema: z.ZodType<
   ActivateEndpointResponse
 > = z.object({
-  ContentType: z.string(),
-  RawResponse: z.custom<Response>(x => x instanceof Response),
-  StatusCode: z.int(),
+  ContentType: z.string().describe(
+    "HTTP response content type for this operation",
+  ),
+  RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+    "Raw HTTP response; suitable for custom response parsing",
+  ),
+  StatusCode: z.int().describe("HTTP response status code for this operation"),
   fourHundredAndFourApplicationJsonObject: z.lazy(() =>
     ActivateEndpointNotFoundResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Not Found"),
   fourHundredAndOneApplicationJsonObject: z.lazy(() =>
     ActivateEndpointUnauthorizedResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Unauthorized"),
   fourHundredApplicationJsonObject: z.lazy(() =>
     ActivateEndpointBadRequestResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Bad Request"),
   twoHundredAndTwoApplicationJsonObject: z.lazy(() =>
     ActivateEndpointResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Accepted"),
 });

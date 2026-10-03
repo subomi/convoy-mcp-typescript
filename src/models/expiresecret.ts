@@ -10,6 +10,8 @@ export type ExpireSecret = {
 };
 
 export const ExpireSecret$zodSchema: z.ZodType<ExpireSecret> = z.object({
-  expiration: z.int().optional(),
-  secret: z.string().optional(),
+  expiration: z.int().optional().describe(
+    "Amount of time to wait before expiring the old endpoint secret.\nIf AdvancedSignatures is turned on for the project, signatures for both secrets will be generated up until\nthe old signature is expired.",
+  ),
+  secret: z.string().optional().describe("New Endpoint secret value."),
 });

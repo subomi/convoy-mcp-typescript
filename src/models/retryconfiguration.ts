@@ -17,8 +17,14 @@ export type RetryConfiguration = {
 
 export const RetryConfiguration$zodSchema: z.ZodType<RetryConfiguration> = z
   .object({
-    duration: z.string().optional(),
-    interval_seconds: z.int().optional(),
-    retry_count: z.int().optional(),
-    type: StrategyProvider$zodSchema.optional(),
+    duration: z.string().optional().describe(
+      "Used to specify a valid Go time duration e.g 10s, 1h3m for how long to wait between event delivery retries",
+    ),
+    interval_seconds: z.int().optional().describe(
+      "Used to specify a time in seconds for how long to wait between event delivery retries,",
+    ),
+    retry_count: z.int().optional().describe(
+      "Used to specify the max number of retries",
+    ),
+    type: StrategyProvider$zodSchema.optional().describe("Retry Strategy type"),
   });
