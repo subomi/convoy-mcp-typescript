@@ -15,7 +15,7 @@ export type CreateBroadcastEventRequest = {
 export const CreateBroadcastEventRequest$zodSchema: z.ZodType<
   CreateBroadcastEventRequest
 > = z.object({
-  BroadcastEvent: BroadcastEvent$zodSchema,
+  BroadcastEvent: BroadcastEvent$zodSchema.describe("Broadcast Event Details"),
   projectID: z.string().describe("Project ID"),
 });
 
@@ -108,19 +108,23 @@ export type CreateBroadcastEventResponse = {
 export const CreateBroadcastEventResponse$zodSchema: z.ZodType<
   CreateBroadcastEventResponse
 > = z.object({
-  ContentType: z.string(),
-  RawResponse: z.custom<Response>(x => x instanceof Response),
-  StatusCode: z.int(),
+  ContentType: z.string().describe(
+    "HTTP response content type for this operation",
+  ),
+  RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+    "Raw HTTP response; suitable for custom response parsing",
+  ),
+  StatusCode: z.int().describe("HTTP response status code for this operation"),
   fourHundredAndFourApplicationJsonObject: z.lazy(() =>
     CreateBroadcastEventNotFoundResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Not Found"),
   fourHundredAndOneApplicationJsonObject: z.lazy(() =>
     CreateBroadcastEventUnauthorizedResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Unauthorized"),
   fourHundredApplicationJsonObject: z.lazy(() =>
     CreateBroadcastEventBadRequestResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Bad Request"),
   twoHundredAndOneApplicationJsonObject: z.lazy(() =>
     CreateBroadcastEventResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Created"),
 });
