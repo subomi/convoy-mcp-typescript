@@ -32,9 +32,11 @@ export type Event = {
 
 export const Event$zodSchema: z.ZodType<Event> = z.object({
   acknowledged_at: z.string().optional(),
-  app_id: z.string().optional(),
+  app_id: z.string().optional().describe("Deprecated"),
   created_at: z.string().optional(),
-  data: z.array(z.int()).optional(),
+  data: z.array(z.int()).optional().describe(
+    "Data is an arbitrary JSON value that gets sent as the body of the\nwebhook to the endpoints",
+  ),
   deleted_at: z.string().optional(),
   endpoint_metadata: z.array(Endpoint$zodSchema).optional(),
   endpoints: z.array(z.string()).optional(),

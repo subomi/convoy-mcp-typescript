@@ -19,7 +19,7 @@ export type UpdatePortalLinkRequest = {
 export const UpdatePortalLinkRequest$zodSchema: z.ZodType<
   UpdatePortalLinkRequest
 > = z.object({
-  PortalLink: PortalLink$zodSchema,
+  PortalLink: PortalLink$zodSchema.describe("Portal Link Details"),
   portalLinkID: z.string().describe("portal link id"),
   projectID: z.string().describe("Project ID"),
 });
@@ -113,19 +113,23 @@ export type UpdatePortalLinkResponse = {
 export const UpdatePortalLinkResponse$zodSchema: z.ZodType<
   UpdatePortalLinkResponse
 > = z.object({
-  ContentType: z.string(),
-  RawResponse: z.custom<Response>(x => x instanceof Response),
-  StatusCode: z.int(),
+  ContentType: z.string().describe(
+    "HTTP response content type for this operation",
+  ),
+  RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+    "Raw HTTP response; suitable for custom response parsing",
+  ),
+  StatusCode: z.int().describe("HTTP response status code for this operation"),
   fourHundredAndFourApplicationJsonObject: z.lazy(() =>
     UpdatePortalLinkNotFoundResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Not Found"),
   fourHundredAndOneApplicationJsonObject: z.lazy(() =>
     UpdatePortalLinkUnauthorizedResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Unauthorized"),
   fourHundredApplicationJsonObject: z.lazy(() =>
     UpdatePortalLinkBadRequestResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Bad Request"),
   twoHundredAndTwoApplicationJsonObject: z.lazy(() =>
     UpdatePortalLinkResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Accepted"),
 });
