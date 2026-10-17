@@ -12,8 +12,14 @@ export type PortalLink = {
 };
 
 export const PortalLink$zodSchema: z.ZodType<PortalLink> = z.object({
-  can_manage_endpoint: z.boolean().optional(),
-  endpoints: z.array(z.string()).optional(),
-  name: z.string().optional(),
-  owner_id: z.string().optional(),
+  can_manage_endpoint: z.boolean().optional().describe(
+    "Specify whether endpoint management can be done through the Portal Link UI",
+  ),
+  endpoints: z.array(z.string()).optional().describe(
+    "IDs of endpoints in this portal link",
+  ),
+  name: z.string().optional().describe("Portal Link Name"),
+  owner_id: z.string().optional().describe(
+    "Alternatively specify OwnerID, the portal link will inherit all the endpoints with this owner ID",
+  ),
 });

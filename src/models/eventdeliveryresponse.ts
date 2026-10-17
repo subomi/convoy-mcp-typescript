@@ -60,7 +60,9 @@ export const EventDeliveryResponse$zodSchema: z.ZodType<EventDeliveryResponse> =
     event_type: z.string().optional(),
     headers: z.record(z.string(), z.array(z.string())).optional(),
     idempotency_key: z.string().optional(),
-    latency: z.string().optional(),
+    latency: z.string().optional().describe(
+      "Deprecated: Latency is deprecated.",
+    ),
     latency_seconds: z.number().optional(),
     metadata: Metadata$zodSchema.optional(),
     project_id: z.string().optional(),
