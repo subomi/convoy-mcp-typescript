@@ -27,7 +27,7 @@ Toggles an endpoint's status between active and paused states`,
     const [result, apiCall] = await endpointsPauseEndpoint(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

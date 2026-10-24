@@ -100,19 +100,25 @@ export type GetFiltersResponse = {
 
 export const GetFiltersResponse$zodSchema: z.ZodType<GetFiltersResponse> = z
   .object({
-    ContentType: z.string(),
-    RawResponse: z.custom<Response>(x => x instanceof Response),
-    StatusCode: z.int(),
+    ContentType: z.string().describe(
+      "HTTP response content type for this operation",
+    ),
+    RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+      "Raw HTTP response; suitable for custom response parsing",
+    ),
+    StatusCode: z.int().describe(
+      "HTTP response status code for this operation",
+    ),
     fourHundredAndFourApplicationJsonObject: z.lazy(() =>
       GetFiltersNotFoundResponseBody$zodSchema
-    ).optional(),
+    ).optional().describe("Not Found"),
     fourHundredAndOneApplicationJsonObject: z.lazy(() =>
       GetFiltersUnauthorizedResponseBody$zodSchema
-    ).optional(),
+    ).optional().describe("Unauthorized"),
     fourHundredApplicationJsonObject: z.lazy(() =>
       GetFiltersBadRequestResponseBody$zodSchema
-    ).optional(),
+    ).optional().describe("Bad Request"),
     twoHundredApplicationJsonObject: z.lazy(() =>
       GetFiltersResponseBody$zodSchema
-    ).optional(),
+    ).optional().describe("OK"),
   });

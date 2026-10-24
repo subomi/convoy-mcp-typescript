@@ -27,7 +27,7 @@ This endpoint updates an existing filter`,
     const [result, apiCall] = await filtersUpdateFilter(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

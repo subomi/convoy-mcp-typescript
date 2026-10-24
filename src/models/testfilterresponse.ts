@@ -8,5 +8,7 @@ export type TestFilterResponse = { is_match?: boolean | undefined };
 
 export const TestFilterResponse$zodSchema: z.ZodType<TestFilterResponse> = z
   .object({
-    is_match: z.boolean().optional(),
+    is_match: z.boolean().optional().describe(
+      "Whether the payload matches the filter criteria",
+    ),
   });

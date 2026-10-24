@@ -27,7 +27,7 @@ This endpoint creates a new filter for a subscription`,
     const [result, apiCall] = await filtersCreateFilter(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

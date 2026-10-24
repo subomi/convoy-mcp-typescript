@@ -25,17 +25,41 @@ export type UpdateEndpoint = {
 };
 
 export const UpdateEndpoint$zodSchema: z.ZodType<UpdateEndpoint> = z.object({
-  advanced_signatures: z.boolean().optional(),
-  authentication: EndpointAuthentication$zodSchema.optional(),
-  description: z.string().optional(),
-  http_timeout: z.int().optional(),
-  is_disabled: z.boolean().optional(),
+  advanced_signatures: z.boolean().optional().describe(
+    "Convoy supports two [signature formats](https://getconvoy.io/docs/product-manual/signatures)\n-- simple or advanced. If left unspecified, we default to false.",
+  ),
+  authentication: EndpointAuthentication$zodSchema.optional().describe(
+    "This is used to define any custom authentication required by the endpoint. This\nshouldn't be needed often because webhook endpoints usually should be exposed to\nthe internet.",
+  ),
+  description: z.string().optional().describe(
+    "Human-readable description of the endpoint. Think of this as metadata describing\nthe endpoint",
+  ),
+  http_timeout: z.int().optional().describe(
+    "Define endpoint http timeout in seconds.",
+  ),
+  is_disabled: z.boolean().optional().describe(
+    "This is used to manually enable/disable the endpoint.",
+  ),
   name: z.string().optional(),
-  owner_id: z.string().optional(),
-  rate_limit: z.int().optional(),
-  rate_limit_duration: z.int().optional(),
-  secret: z.string().optional(),
-  slack_webhook_url: z.string().optional(),
-  support_email: z.string().optional(),
-  url: z.string().optional(),
+  owner_id: z.string().optional().describe(
+    "The OwnerID is used to group more than one endpoint together to achieve\n[fanout](https://getconvoy.io/docs/manual/endpoints#Endpoint%20Owner%20ID)",
+  ),
+  rate_limit: z.int().optional().describe(
+    "Rate limit is the total number of requests to be sent to an endpoint in\nthe time duration specified in RateLimitDuration",
+  ),
+  rate_limit_duration: z.int().optional().describe(
+    "Rate limit duration specifies the time range for the rate limit.",
+  ),
+  secret: z.string().optional().describe(
+    "Endpoint's webhook secret. If not provided, Convoy autogenerates one for the endpoint.",
+  ),
+  slack_webhook_url: z.string().optional().describe(
+    "Slack webhook URL is an alternative method to support email where endpoint developers\ncan receive failure notifications on a slack channel.",
+  ),
+  support_email: z.string().optional().describe(
+    "Endpoint developers support email. This is used for communicating endpoint state\nchanges. You should always turn this on when disabling endpoints are enabled.",
+  ),
+  url: z.string().optional().describe(
+    "URL is the endpoint's URL prefixed with https. non-https urls are currently\nnot supported.",
+  ),
 });

@@ -15,8 +15,7 @@ export type DynamicEventData = {};
 export const DynamicEventData$zodSchema: z.ZodType<DynamicEventData> = z.object(
   {},
 ).describe(
-  "Data is an arbitrary JSON value that gets sent as the body of the\n"
-    + "webhook to the endpoints",
+  "Data is an arbitrary JSON value that gets sent as the body of the\nwebhook to the endpoints",
 );
 
 export type DynamicEvent = {
@@ -30,11 +29,25 @@ export type DynamicEvent = {
 };
 
 export const DynamicEvent$zodSchema: z.ZodType<DynamicEvent> = z.object({
-  custom_headers: z.record(z.string(), z.string()).optional(),
-  data: z.lazy(() => DynamicEventData$zodSchema).optional(),
-  event_type: z.string().optional(),
-  event_types: z.array(z.string()).optional(),
-  idempotency_key: z.string().optional(),
-  secret: z.string().optional(),
-  url: z.string().optional(),
+  custom_headers: z.record(z.string(), z.string()).optional().describe(
+    "Specifies custom headers you want convoy to add when the event is dispatched to your endpoint",
+  ),
+  data: z.lazy(() => DynamicEventData$zodSchema).optional().describe(
+    "Data is an arbitrary JSON value that gets sent as the body of the\nwebhook to the endpoints",
+  ),
+  event_type: z.string().optional().describe(
+    "Event Type is used for filtering and debugging e.g invoice.paid",
+  ),
+  event_types: z.array(z.string()).optional().describe(
+    "A list of event types for the subscription filter config",
+  ),
+  idempotency_key: z.string().optional().describe(
+    "Specify a key for event deduplication",
+  ),
+  secret: z.string().optional().describe(
+    "Endpoint's webhook secret. If not provided, Convoy autogenerates one for the endpoint.",
+  ),
+  url: z.string().optional().describe(
+    "URL is the endpoint's URL prefixed with https. non-https urls are currently\nnot supported.",
+  ),
 });
