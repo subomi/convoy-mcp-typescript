@@ -27,7 +27,7 @@ This endpoint tests a filter against a payload`,
     const [result, apiCall] = await filtersTestFilter(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

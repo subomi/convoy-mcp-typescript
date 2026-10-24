@@ -27,7 +27,7 @@ This endpoint replays multiple events at once.`,
     const [result, apiCall] = await eventsBatchReplayEvents(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -27,7 +27,7 @@ This endpoint creates a source`,
     const [result, apiCall] = await sourcesCreateSource(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

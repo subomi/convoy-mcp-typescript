@@ -29,7 +29,7 @@ This endpoint enables you retry a previously successful event delivery`,
     const [result, apiCall] = await eventDeliveriesForceResendEventDeliveries(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
