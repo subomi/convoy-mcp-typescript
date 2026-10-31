@@ -28,7 +28,7 @@ This endpoint fetches multiple portal links`,
       const [result, apiCall] = await portalLinksLoadPortalLinksPaged(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
       if (!result.ok) {

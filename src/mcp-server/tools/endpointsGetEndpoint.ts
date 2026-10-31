@@ -27,7 +27,7 @@ This endpoint fetches an endpoint`,
     const [result, apiCall] = await endpointsGetEndpoint(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
