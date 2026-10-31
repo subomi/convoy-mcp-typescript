@@ -27,7 +27,7 @@ This endpoint creates a portal link`,
     const [result, apiCall] = await portalLinksCreatePortalLink(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

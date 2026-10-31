@@ -27,7 +27,7 @@ This endpoint retrieves a portal link by its id.`,
     const [result, apiCall] = await portalLinksGetPortalLink(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
