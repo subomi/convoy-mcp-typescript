@@ -27,7 +27,7 @@ This endpoint expires and re-generates the endpoint secret.`,
     const [result, apiCall] = await endpointsExpireSecret(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

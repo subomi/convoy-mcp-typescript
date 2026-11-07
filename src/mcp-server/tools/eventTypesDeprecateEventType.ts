@@ -27,7 +27,7 @@ This endpoint deprecates an event type`,
     const [result, apiCall] = await eventTypesDeprecateEventType(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

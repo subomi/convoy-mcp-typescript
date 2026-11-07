@@ -102,19 +102,25 @@ export type GetEventTypesResponse = {
 
 export const GetEventTypesResponse$zodSchema: z.ZodType<GetEventTypesResponse> =
   z.object({
-    ContentType: z.string(),
-    RawResponse: z.custom<Response>(x => x instanceof Response),
-    StatusCode: z.int(),
+    ContentType: z.string().describe(
+      "HTTP response content type for this operation",
+    ),
+    RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+      "Raw HTTP response; suitable for custom response parsing",
+    ),
+    StatusCode: z.int().describe(
+      "HTTP response status code for this operation",
+    ),
     fourHundredAndFourApplicationJsonObject: z.lazy(() =>
       GetEventTypesNotFoundResponseBody$zodSchema
-    ).optional(),
+    ).optional().describe("Not Found"),
     fourHundredAndOneApplicationJsonObject: z.lazy(() =>
       GetEventTypesUnauthorizedResponseBody$zodSchema
-    ).optional(),
+    ).optional().describe("Unauthorized"),
     fourHundredApplicationJsonObject: z.lazy(() =>
       GetEventTypesBadRequestResponseBody$zodSchema
-    ).optional(),
+    ).optional().describe("Bad Request"),
     twoHundredApplicationJsonObject: z.lazy(() =>
       GetEventTypesResponseBody$zodSchema
-    ).optional(),
+    ).optional().describe("OK"),
   });

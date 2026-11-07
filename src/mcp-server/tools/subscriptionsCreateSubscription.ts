@@ -28,7 +28,7 @@ This endpoint creates a subscriptions`,
       const [result, apiCall] = await subscriptionsCreateSubscription(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
       if (!result.ok) {

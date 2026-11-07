@@ -27,7 +27,7 @@ This endpoint does not require creating endpoint and subscriptions ahead of time
     const [result, apiCall] = await eventsCreateDynamicEvent(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

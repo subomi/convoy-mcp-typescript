@@ -27,7 +27,7 @@ This endpoint fetches meta events with pagination`,
     const [result, apiCall] = await metaEventsGetMetaEventsPaged(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
