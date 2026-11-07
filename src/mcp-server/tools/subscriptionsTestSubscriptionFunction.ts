@@ -29,7 +29,7 @@ This endpoint test runs a transform function against a payload.`,
     const [result, apiCall] = await subscriptionsTestSubscriptionFunction(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

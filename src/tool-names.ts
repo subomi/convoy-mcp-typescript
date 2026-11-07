@@ -1,0 +1,239 @@
+// Auto-generated at build time
+export const toolNames: Array<{ name: string; description: string }>= [
+  {
+    "name": "endpoints-get-endpoints",
+    "description": "List all endpoints\n\nThis endpoint fetches an endpoints"
+  },
+  {
+    "name": "endpoints-create-endpoint",
+    "description": "Create an endpoint\n\nThis endpoint creates an endpoint"
+  },
+  {
+    "name": "endpoints-delete-endpoint",
+    "description": "Delete endpoint\n\nThis endpoint deletes an endpoint"
+  },
+  {
+    "name": "endpoints-get-endpoint",
+    "description": "Retrieve endpoint\n\nThis endpoint fetches an endpoint"
+  },
+  {
+    "name": "endpoints-update-endpoint",
+    "description": "Update an endpoint\n\nThis endpoint updates an endpoint"
+  },
+  {
+    "name": "endpoints-activate-endpoint",
+    "description": "Activate endpoint\n\nActivated an inactive endpoint"
+  },
+  {
+    "name": "endpoints-expire-secret",
+    "description": "Roll endpoint secret\n\nThis endpoint expires and re-generates the endpoint secret."
+  },
+  {
+    "name": "endpoints-pause-endpoint",
+    "description": "Pause endpoint\n\nToggles an endpoint's status between active and paused states"
+  },
+  {
+    "name": "event-types-get-event-types",
+    "description": "Retrieves a project's event types\n\nThis endpoint fetches the project's event types"
+  },
+  {
+    "name": "event-types-create-event-type",
+    "description": "Create an event type\n\nThis endpoint creates an event type"
+  },
+  {
+    "name": "event-types-update-event-type",
+    "description": "Updates an event type\n\nThis endpoint updates an event type"
+  },
+  {
+    "name": "event-types-deprecate-event-type",
+    "description": "Deprecates an event type\n\nThis endpoint deprecates an event type"
+  },
+  {
+    "name": "event-types-import-open-api-spec",
+    "description": "Import event types from OpenAPI spec\n\nThis endpoint imports event types from an OpenAPI specification"
+  },
+  {
+    "name": "event-deliveries-get-event-deliveries-paged",
+    "description": "List all event deliveries\n\nThis endpoint retrieves all event deliveries paginated."
+  },
+  {
+    "name": "event-deliveries-get-event-delivery",
+    "description": "Retrieve an event delivery\n\nThis endpoint fetches an event delivery."
+  },
+  {
+    "name": "event-deliveries-resend-event-delivery",
+    "description": "Retry event delivery\n\nThis endpoint retries an event delivery."
+  },
+  {
+    "name": "event-deliveries-batch-retry-event-delivery",
+    "description": "Batch retry event delivery\n\nThis endpoint batch retries multiple event deliveries at once."
+  },
+  {
+    "name": "event-deliveries-force-resend-event-deliveries",
+    "description": "Force retry event delivery\n\nThis endpoint enables you retry a previously successful event delivery"
+  },
+  {
+    "name": "delivery-attempts-get-delivery-attempts",
+    "description": "List delivery attempts\n\nThis endpoint fetches an app message's delivery attempts"
+  },
+  {
+    "name": "delivery-attempts-get-delivery-attempt",
+    "description": "Retrieve a delivery attempt\n\nThis endpoint fetches an app event delivery attempt"
+  },
+  {
+    "name": "events-get-events-paged",
+    "description": "List all events\n\nThis endpoint fetches app events with pagination"
+  },
+  {
+    "name": "events-create-endpoint-event",
+    "description": "Create an event\n\nThis endpoint creates an endpoint event"
+  },
+  {
+    "name": "events-get-endpoint-event",
+    "description": "Retrieve an event\n\nThis endpoint retrieves an event"
+  },
+  {
+    "name": "events-replay-endpoint-event",
+    "description": "Replay event\n\nThis endpoint replays an event afresh assuming it is a new event."
+  },
+  {
+    "name": "events-batch-replay-events",
+    "description": "Batch replay events\n\nThis endpoint replays multiple events at once."
+  },
+  {
+    "name": "events-create-broadcast-event",
+    "description": "Create a broadcast event\n\nThis endpoint creates a event that is broadcast to every endpoint whose subscription matches the given event type."
+  },
+  {
+    "name": "events-create-dynamic-event",
+    "description": "Dynamic Events\n\nThis endpoint does not require creating endpoint and subscriptions ahead of time. Instead, you supply the endpoint and the payload, and Convoy delivers the events"
+  },
+  {
+    "name": "events-create-endpoint-fanout-event",
+    "description": "Fan out an event\n\nThis endpoint uses the owner_id to fan out an event to multiple endpoints."
+  },
+  {
+    "name": "meta-events-get-meta-events-paged",
+    "description": "List all meta events\n\nThis endpoint fetches meta events with pagination"
+  },
+  {
+    "name": "meta-events-get-meta-event",
+    "description": "Retrieve a meta event\n\nThis endpoint retrieves a meta event"
+  },
+  {
+    "name": "meta-events-resend-meta-event",
+    "description": "Retry meta event\n\nThis endpoint retries a meta event"
+  },
+  {
+    "name": "portal-links-load-portal-links-paged",
+    "description": "List all portal links\n\nThis endpoint fetches multiple portal links"
+  },
+  {
+    "name": "portal-links-create-portal-link",
+    "description": "Create a portal link\n\nThis endpoint creates a portal link"
+  },
+  {
+    "name": "portal-links-get-portal-link",
+    "description": "Retrieve a portal link\n\nThis endpoint retrieves a portal link by its id."
+  },
+  {
+    "name": "portal-links-generate-portal-token",
+    "description": "Updates a portal link auth token\n\nThis endpoint retrieves a portal link by its id."
+  },
+  {
+    "name": "portal-links-update-portal-link",
+    "description": "Update a portal link\n\nThis endpoint updates a portal link"
+  },
+  {
+    "name": "portal-links-refresh-portal-link-auth-token",
+    "description": "Get a portal link auth token\n\nThis endpoint retrieves a portal link auth token"
+  },
+  {
+    "name": "portal-links-revoke-portal-link",
+    "description": "Revoke a portal link\n\nThis endpoint revokes a portal link"
+  },
+  {
+    "name": "sources-load-sources-paged",
+    "description": "List all sources\n\nThis endpoint fetches multiple sources"
+  },
+  {
+    "name": "sources-create-source",
+    "description": "Create a source\n\nThis endpoint creates a source"
+  },
+  {
+    "name": "sources-delete-source",
+    "description": "Delete a source\n\nThis endpoint deletes a source"
+  },
+  {
+    "name": "sources-get-source",
+    "description": "Retrieve a source\n\nThis endpoint retrieves a source by its id"
+  },
+  {
+    "name": "sources-update-source",
+    "description": "Update a source\n\nThis endpoint updates a source"
+  },
+  {
+    "name": "sources-test-source-function",
+    "description": "Validate source function\n\nThis endpoint validates that a filter will match a certain payload structure."
+  },
+  {
+    "name": "subscriptions-get-subscriptions",
+    "description": "List all subscriptions\n\nThis endpoint fetches all the subscriptions"
+  },
+  {
+    "name": "subscriptions-create-subscription",
+    "description": "Create a subscription\n\nThis endpoint creates a subscriptions"
+  },
+  {
+    "name": "subscriptions-delete-subscription",
+    "description": "Delete subscription\n\nThis endpoint deletes a subscription"
+  },
+  {
+    "name": "subscriptions-get-subscription",
+    "description": "Retrieve a subscription\n\nThis endpoint retrieves a single subscription"
+  },
+  {
+    "name": "subscriptions-update-subscription",
+    "description": "Update a subscription\n\nThis endpoint updates a subscription"
+  },
+  {
+    "name": "subscriptions-test-subscription-filter",
+    "description": "Validate subscription filter\n\nThis endpoint validates that a filter will match a certain payload structure."
+  },
+  {
+    "name": "subscriptions-test-subscription-function",
+    "description": "Test a subscription function\n\nThis endpoint test runs a transform function against a payload."
+  },
+  {
+    "name": "filters-get-filters",
+    "description": "List all filters\n\nThis endpoint fetches all filters for a subscription"
+  },
+  {
+    "name": "filters-create-filter",
+    "description": "Create a new filter\n\nThis endpoint creates a new filter for a subscription"
+  },
+  {
+    "name": "filters-delete-filter",
+    "description": "Delete a filter\n\nThis endpoint deletes a filter"
+  },
+  {
+    "name": "filters-get-filter",
+    "description": "Get a filter\n\nThis endpoint retrieves a single filter"
+  },
+  {
+    "name": "filters-update-filter",
+    "description": "Update a filter\n\nThis endpoint updates an existing filter"
+  },
+  {
+    "name": "filters-bulk-create-filters",
+    "description": "Create multiple subscription filters\n\nThis endpoint creates multiple filters for a subscription"
+  },
+  {
+    "name": "filters-bulk-update-filters",
+    "description": "Update multiple subscription filters\n\nThis endpoint updates multiple filters for a subscription"
+  },
+  {
+    "name": "filters-test-filter",
+    "description": "Test a filter\n\nThis endpoint tests a filter against a payload"
+  }
+];

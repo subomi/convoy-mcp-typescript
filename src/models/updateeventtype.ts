@@ -11,7 +11,13 @@ export type UpdateEventType = {
 };
 
 export const UpdateEventType$zodSchema: z.ZodType<UpdateEventType> = z.object({
-  category: z.string().optional(),
-  description: z.string().optional(),
-  json_schema: z.record(z.string(), z.any()).optional(),
+  category: z.string().optional().describe(
+    "Category is a product-specific grouping for the event type",
+  ),
+  description: z.string().optional().describe(
+    "Description is used to describe what the event type does",
+  ),
+  json_schema: z.record(z.string(), z.any()).optional().describe(
+    "JSONSchema is the JSON structure of the event type",
+  ),
 });

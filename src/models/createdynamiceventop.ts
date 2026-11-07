@@ -14,7 +14,7 @@ export type CreateDynamicEventRequest = {
 export const CreateDynamicEventRequest$zodSchema: z.ZodType<
   CreateDynamicEventRequest
 > = z.object({
-  DynamicEvent: DynamicEvent$zodSchema,
+  DynamicEvent: DynamicEvent$zodSchema.describe("Event Details"),
   projectID: z.string().describe("Project ID"),
 });
 
@@ -88,17 +88,21 @@ export type CreateDynamicEventResponse = {
 export const CreateDynamicEventResponse$zodSchema: z.ZodType<
   CreateDynamicEventResponse
 > = z.object({
-  ContentType: z.string(),
-  ObjectT: ObjectT$zodSchema.optional(),
-  RawResponse: z.custom<Response>(x => x instanceof Response),
-  StatusCode: z.int(),
+  ContentType: z.string().describe(
+    "HTTP response content type for this operation",
+  ),
+  ObjectT: ObjectT$zodSchema.optional().describe("Created"),
+  RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+    "Raw HTTP response; suitable for custom response parsing",
+  ),
+  StatusCode: z.int().describe("HTTP response status code for this operation"),
   fourHundredAndFourApplicationJsonObject: z.lazy(() =>
     CreateDynamicEventNotFoundResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Not Found"),
   fourHundredAndOneApplicationJsonObject: z.lazy(() =>
     CreateDynamicEventUnauthorizedResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Unauthorized"),
   fourHundredApplicationJsonObject: z.lazy(() =>
     CreateDynamicEventBadRequestResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Bad Request"),
 });

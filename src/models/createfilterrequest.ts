@@ -12,7 +12,13 @@ export type CreateFilterRequest = {
 
 export const CreateFilterRequest$zodSchema: z.ZodType<CreateFilterRequest> = z
   .object({
-    body: z.record(z.string(), z.any()).optional(),
-    event_type: z.string(),
-    headers: z.record(z.string(), z.any()).optional(),
+    body: z.record(z.string(), z.any()).optional().describe(
+      "Body matching criteria (optional)",
+    ),
+    event_type: z.string().describe(
+      "Type of event this filter applies to (required)",
+    ),
+    headers: z.record(z.string(), z.any()).optional().describe(
+      "Header matching criteria (optional)",
+    ),
   });

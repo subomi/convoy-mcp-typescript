@@ -27,7 +27,7 @@ This endpoint creates a event that is broadcast to every endpoint whose subscrip
     const [result, apiCall] = await eventsCreateBroadcastEvent(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

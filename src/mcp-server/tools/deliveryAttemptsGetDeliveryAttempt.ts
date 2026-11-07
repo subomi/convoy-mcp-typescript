@@ -29,7 +29,7 @@ This endpoint fetches an app event delivery attempt`,
     const [result, apiCall] = await deliveryAttemptsGetDeliveryAttempt(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
