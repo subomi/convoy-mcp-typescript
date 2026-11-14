@@ -7,5 +7,7 @@ import * as z from "zod";
 export type IDs = { ids?: Array<string> | undefined };
 
 export const IDs$zodSchema: z.ZodType<IDs> = z.object({
-  ids: z.array(z.string()).optional(),
+  ids: z.array(z.string()).optional().describe(
+    "A list of event delivery IDs to forcefully resend.",
+  ),
 });

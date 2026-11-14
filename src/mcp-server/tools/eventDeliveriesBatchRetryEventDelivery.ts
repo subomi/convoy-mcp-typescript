@@ -29,7 +29,7 @@ This endpoint batch retries multiple event deliveries at once.`,
     const [result, apiCall] = await eventDeliveriesBatchRetryEventDelivery(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

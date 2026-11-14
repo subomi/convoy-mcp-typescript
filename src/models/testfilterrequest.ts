@@ -8,5 +8,7 @@ export type TestFilterRequest = { payload?: any | undefined };
 
 export const TestFilterRequest$zodSchema: z.ZodType<TestFilterRequest> = z
   .object({
-    payload: z.any().optional(),
+    payload: z.any().optional().describe(
+      "Sample payload to test against the filter (required)",
+    ),
   });

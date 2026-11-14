@@ -20,11 +20,13 @@ export type Metadata = {
 };
 
 export const Metadata$zodSchema: z.ZodType<Metadata> = z.object({
-  data: z.array(z.int()).optional(),
+  data: z.array(z.int()).optional().describe("Data to be sent to endpoint."),
   interval_seconds: z.int().optional(),
   max_retry_seconds: z.int().optional(),
   next_send_time: z.string().optional(),
-  num_trials: z.int().optional(),
+  num_trials: z.int().optional().describe(
+    "NumTrials: number of times we have tried to deliver this Event to\nan application",
+  ),
   raw: z.string().optional(),
   retry_limit: z.int().optional(),
   strategy: StrategyProvider$zodSchema.optional(),

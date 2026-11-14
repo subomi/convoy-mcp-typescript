@@ -22,7 +22,9 @@ export type UpdateSubscriptionRequest = {
 export const UpdateSubscriptionRequest$zodSchema: z.ZodType<
   UpdateSubscriptionRequest
 > = z.object({
-  UpdateSubscription: UpdateSubscription$zodSchema,
+  UpdateSubscription: UpdateSubscription$zodSchema.describe(
+    "Subscription Details",
+  ),
   projectID: z.string().describe("Project ID"),
   subscriptionID: z.string().describe("subscription id"),
 });
@@ -116,19 +118,23 @@ export type UpdateSubscriptionResponse = {
 export const UpdateSubscriptionResponse$zodSchema: z.ZodType<
   UpdateSubscriptionResponse
 > = z.object({
-  ContentType: z.string(),
-  RawResponse: z.custom<Response>(x => x instanceof Response),
-  StatusCode: z.int(),
+  ContentType: z.string().describe(
+    "HTTP response content type for this operation",
+  ),
+  RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+    "Raw HTTP response; suitable for custom response parsing",
+  ),
+  StatusCode: z.int().describe("HTTP response status code for this operation"),
   fourHundredAndFourApplicationJsonObject: z.lazy(() =>
     UpdateSubscriptionNotFoundResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Not Found"),
   fourHundredAndOneApplicationJsonObject: z.lazy(() =>
     UpdateSubscriptionUnauthorizedResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Unauthorized"),
   fourHundredApplicationJsonObject: z.lazy(() =>
     UpdateSubscriptionBadRequestResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Bad Request"),
   twoHundredAndTwoApplicationJsonObject: z.lazy(() =>
     UpdateSubscriptionResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Accepted"),
 });
