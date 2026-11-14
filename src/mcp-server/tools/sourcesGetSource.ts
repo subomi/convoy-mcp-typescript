@@ -27,7 +27,7 @@ This endpoint retrieves a source by its id`,
     const [result, apiCall] = await sourcesGetSource(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

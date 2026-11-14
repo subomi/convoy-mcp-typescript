@@ -28,7 +28,7 @@ This endpoint fetches an event delivery.`,
       const [result, apiCall] = await eventDeliveriesGetEventDelivery(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
       if (!result.ok) {
