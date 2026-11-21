@@ -14,7 +14,7 @@ export type CreateEndpointFanoutEventRequest = {
 export const CreateEndpointFanoutEventRequest$zodSchema: z.ZodType<
   CreateEndpointFanoutEventRequest
 > = z.object({
-  FanoutEvent: FanoutEvent$zodSchema,
+  FanoutEvent: FanoutEvent$zodSchema.describe("Event Details"),
   projectID: z.string().describe("Project ID"),
 });
 
@@ -105,19 +105,23 @@ export type CreateEndpointFanoutEventResponse = {
 export const CreateEndpointFanoutEventResponse$zodSchema: z.ZodType<
   CreateEndpointFanoutEventResponse
 > = z.object({
-  ContentType: z.string(),
-  RawResponse: z.custom<Response>(x => x instanceof Response),
-  StatusCode: z.int(),
+  ContentType: z.string().describe(
+    "HTTP response content type for this operation",
+  ),
+  RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+    "Raw HTTP response; suitable for custom response parsing",
+  ),
+  StatusCode: z.int().describe("HTTP response status code for this operation"),
   fourHundredAndFourApplicationJsonObject: z.lazy(() =>
     CreateEndpointFanoutEventNotFoundResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Not Found"),
   fourHundredAndOneApplicationJsonObject: z.lazy(() =>
     CreateEndpointFanoutEventUnauthorizedResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Unauthorized"),
   fourHundredApplicationJsonObject: z.lazy(() =>
     CreateEndpointFanoutEventBadRequestResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Bad Request"),
   twoHundredAndOneApplicationJsonObject: z.lazy(() =>
     CreateEndpointFanoutEventResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Created"),
 });

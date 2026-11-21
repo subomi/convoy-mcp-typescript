@@ -110,19 +110,23 @@ export type GetDeliveryAttemptResponse = {
 export const GetDeliveryAttemptResponse$zodSchema: z.ZodType<
   GetDeliveryAttemptResponse
 > = z.object({
-  ContentType: z.string(),
-  RawResponse: z.custom<Response>(x => x instanceof Response),
-  StatusCode: z.int(),
+  ContentType: z.string().describe(
+    "HTTP response content type for this operation",
+  ),
+  RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+    "Raw HTTP response; suitable for custom response parsing",
+  ),
+  StatusCode: z.int().describe("HTTP response status code for this operation"),
   fourHundredAndFourApplicationJsonObject: z.lazy(() =>
     GetDeliveryAttemptNotFoundResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Not Found"),
   fourHundredAndOneApplicationJsonObject: z.lazy(() =>
     GetDeliveryAttemptUnauthorizedResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Unauthorized"),
   fourHundredApplicationJsonObject: z.lazy(() =>
     GetDeliveryAttemptBadRequestResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Bad Request"),
   twoHundredApplicationJsonObject: z.lazy(() =>
     GetDeliveryAttemptResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("OK"),
 });
