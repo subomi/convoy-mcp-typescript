@@ -26,6 +26,7 @@ import { Logger } from "./logger.js";
 import { ERR, OK, Result } from "./result.js";
 import { retry, RetryConfig } from "./retries.js";
 import { SecurityState } from "./security.js";
+import { Params, pathToFunc } from "./url.js";
 
 export type RequestOptions = {
   /**
@@ -67,6 +68,19 @@ type RequestConfig = {
   userAgent?: string | undefined;
   timeoutMs?: number;
 };
+
+export function encodePath(
+  pathPattern: string,
+  params: Params,
+): Result<string, InvalidRequestError> {
+  try {
+    return OK(pathToFunc(pathPattern, { rejectDotSegments: true })(params));
+  } catch (err: unknown) {
+    return ERR(
+      new InvalidRequestError(err instanceof Error ? err.message : String(err)),
+    );
+  }
+}
 
 const gt: unknown = typeof globalThis === "undefined" ? null : globalThis;
 const webWorkerLike = typeof gt === "object"
@@ -306,9 +320,9 @@ export class ClientSDK {
   }
 }
 
-const jsonLikeContentTypeRE = /(application|text)\/.*?\+*json.*/;
+const jsonLikeContentTypeRE = /^(application|text)\/([^+]+\+)*json.*/;
 const jsonlLikeContentTypeRE =
-  /(application|text)\/(.*?\+*\bjsonl\b.*|.*?\+*\bx-ndjson\b.*)/;
+  /^(application|text)\/([^+]+\+)*(jsonl|x-ndjson)\b.*/;
 async function logRequest(logger: Logger | undefined, req: Request) {
   if (!logger) {
     return;
@@ -379,8 +393,6 @@ async function logResponse(
       break;
     case matchContentType(res, "application/jsonl")
       || jsonlLikeContentTypeRE.test(ct):
-      logger.log(await res.clone().text());
-      break;
     case matchContentType(res, "text/event-stream"):
       logger.log(`<${contentType}>`);
       break;

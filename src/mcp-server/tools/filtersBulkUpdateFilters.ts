@@ -27,7 +27,7 @@ This endpoint updates multiple filters for a subscription`,
     const [result, apiCall] = await filtersBulkUpdateFilters(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
