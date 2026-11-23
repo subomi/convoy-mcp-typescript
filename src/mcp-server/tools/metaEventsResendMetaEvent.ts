@@ -27,7 +27,7 @@ This endpoint retries a meta event`,
     const [result, apiCall] = await metaEventsResendMetaEvent(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

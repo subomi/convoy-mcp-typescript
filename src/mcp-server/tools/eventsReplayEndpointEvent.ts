@@ -27,7 +27,7 @@ This endpoint replays an event afresh assuming it is a new event.`,
     const [result, apiCall] = await eventsReplayEndpointEvent(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

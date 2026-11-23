@@ -49,7 +49,9 @@ export type SubscriptionResponse = {
 
 export const SubscriptionResponse$zodSchema: z.ZodType<SubscriptionResponse> = z
   .object({
-    alert_config: AlertConfiguration$zodSchema.optional(),
+    alert_config: AlertConfiguration$zodSchema.optional().describe(
+      "subscription config",
+    ),
     created_at: z.string().optional(),
     deleted_at: z.string().optional(),
     delivery_mode: DeliveryMode$zodSchema.optional(),
