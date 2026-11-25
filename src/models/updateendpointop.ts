@@ -18,7 +18,7 @@ export type UpdateEndpointRequest = {
 
 export const UpdateEndpointRequest$zodSchema: z.ZodType<UpdateEndpointRequest> =
   z.object({
-    UpdateEndpoint: UpdateEndpoint$zodSchema,
+    UpdateEndpoint: UpdateEndpoint$zodSchema.describe("Endpoint Details"),
     endpointID: z.string().describe("Endpoint ID"),
     projectID: z.string().describe("Project ID"),
   });
@@ -112,19 +112,23 @@ export type UpdateEndpointResponse = {
 export const UpdateEndpointResponse$zodSchema: z.ZodType<
   UpdateEndpointResponse
 > = z.object({
-  ContentType: z.string(),
-  RawResponse: z.custom<Response>(x => x instanceof Response),
-  StatusCode: z.int(),
+  ContentType: z.string().describe(
+    "HTTP response content type for this operation",
+  ),
+  RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+    "Raw HTTP response; suitable for custom response parsing",
+  ),
+  StatusCode: z.int().describe("HTTP response status code for this operation"),
   fourHundredAndFourApplicationJsonObject: z.lazy(() =>
     UpdateEndpointNotFoundResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Not Found"),
   fourHundredAndOneApplicationJsonObject: z.lazy(() =>
     UpdateEndpointUnauthorizedResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Unauthorized"),
   fourHundredApplicationJsonObject: z.lazy(() =>
     UpdateEndpointBadRequestResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Bad Request"),
   twoHundredAndTwoApplicationJsonObject: z.lazy(() =>
     UpdateEndpointResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Accepted"),
 });

@@ -27,7 +27,7 @@ This endpoint retrieves an event`,
     const [result, apiCall] = await eventsGetEndpointEvent(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -28,7 +28,7 @@ This endpoint deletes a subscription`,
       const [result, apiCall] = await subscriptionsDeleteSubscription(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
       if (!result.ok) {

@@ -28,7 +28,7 @@ This endpoint uses the owner_id to fan out an event to multiple endpoints.`,
       const [result, apiCall] = await eventsCreateEndpointFanoutEvent(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
       if (!result.ok) {

@@ -27,7 +27,7 @@ This endpoint fetches all filters for a subscription`,
     const [result, apiCall] = await filtersGetFilters(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
