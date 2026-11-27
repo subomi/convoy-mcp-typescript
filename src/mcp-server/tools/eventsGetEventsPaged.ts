@@ -27,7 +27,7 @@ This endpoint fetches app events with pagination`,
     const [result, apiCall] = await eventsGetEventsPaged(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

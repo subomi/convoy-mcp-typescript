@@ -11,7 +11,7 @@ export type ForceResendEventDeliveriesRequest = { projectID: string; IDs: IDs };
 export const ForceResendEventDeliveriesRequest$zodSchema: z.ZodType<
   ForceResendEventDeliveriesRequest
 > = z.object({
-  IDs: IDs$zodSchema,
+  IDs: IDs$zodSchema.describe("event delivery ids"),
   projectID: z.string().describe("Project ID"),
 });
 
@@ -101,19 +101,23 @@ export type ForceResendEventDeliveriesResponse = {
 export const ForceResendEventDeliveriesResponse$zodSchema: z.ZodType<
   ForceResendEventDeliveriesResponse
 > = z.object({
-  ContentType: z.string(),
-  RawResponse: z.custom<Response>(x => x instanceof Response),
-  StatusCode: z.int(),
+  ContentType: z.string().describe(
+    "HTTP response content type for this operation",
+  ),
+  RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+    "Raw HTTP response; suitable for custom response parsing",
+  ),
+  StatusCode: z.int().describe("HTTP response status code for this operation"),
   fourHundredAndFourApplicationJsonObject: z.lazy(() =>
     ForceResendEventDeliveriesNotFoundResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Not Found"),
   fourHundredAndOneApplicationJsonObject: z.lazy(() =>
     ForceResendEventDeliveriesUnauthorizedResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Unauthorized"),
   fourHundredApplicationJsonObject: z.lazy(() =>
     ForceResendEventDeliveriesBadRequestResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Bad Request"),
   twoHundredApplicationJsonObject: z.lazy(() =>
     ForceResendEventDeliveriesResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("OK"),
 });

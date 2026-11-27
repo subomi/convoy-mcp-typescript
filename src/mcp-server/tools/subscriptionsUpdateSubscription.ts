@@ -28,7 +28,7 @@ This endpoint updates a subscription`,
       const [result, apiCall] = await subscriptionsUpdateSubscription(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
       if (!result.ok) {

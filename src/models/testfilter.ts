@@ -11,6 +11,6 @@ export type TestFilter = {
 };
 
 export const TestFilter$zodSchema: z.ZodType<TestFilter> = z.object({
-  request: FilterSchema$zodSchema.optional(),
-  schema: FilterSchema$zodSchema.optional(),
+  request: FilterSchema$zodSchema.optional().describe("Same Request & Headers"),
+  schema: FilterSchema$zodSchema.optional().describe("Sample test schema"),
 });

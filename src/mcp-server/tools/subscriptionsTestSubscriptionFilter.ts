@@ -29,7 +29,7 @@ This endpoint validates that a filter will match a certain payload structure.`,
     const [result, apiCall] = await subscriptionsTestSubscriptionFilter(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

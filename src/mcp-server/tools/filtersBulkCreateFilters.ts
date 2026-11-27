@@ -27,7 +27,7 @@ This endpoint creates multiple filters for a subscription`,
     const [result, apiCall] = await filtersBulkCreateFilters(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

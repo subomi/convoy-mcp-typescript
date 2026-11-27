@@ -18,7 +18,9 @@ export type ExpireSecretRequest = {
 
 export const ExpireSecretRequest$zodSchema: z.ZodType<ExpireSecretRequest> = z
   .object({
-    ExpireSecret: ExpireSecret$zodSchema,
+    ExpireSecret: ExpireSecret$zodSchema.describe(
+      "Expire Secret Body Parameters",
+    ),
     endpointID: z.string().describe("Endpoint ID"),
     projectID: z.string().describe("Project ID"),
   });
@@ -109,19 +111,25 @@ export type ExpireSecretResponse = {
 
 export const ExpireSecretResponse$zodSchema: z.ZodType<ExpireSecretResponse> = z
   .object({
-    ContentType: z.string(),
-    RawResponse: z.custom<Response>(x => x instanceof Response),
-    StatusCode: z.int(),
+    ContentType: z.string().describe(
+      "HTTP response content type for this operation",
+    ),
+    RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+      "Raw HTTP response; suitable for custom response parsing",
+    ),
+    StatusCode: z.int().describe(
+      "HTTP response status code for this operation",
+    ),
     fourHundredAndFourApplicationJsonObject: z.lazy(() =>
       ExpireSecretNotFoundResponseBody$zodSchema
-    ).optional(),
+    ).optional().describe("Not Found"),
     fourHundredAndOneApplicationJsonObject: z.lazy(() =>
       ExpireSecretUnauthorizedResponseBody$zodSchema
-    ).optional(),
+    ).optional().describe("Unauthorized"),
     fourHundredApplicationJsonObject: z.lazy(() =>
       ExpireSecretBadRequestResponseBody$zodSchema
-    ).optional(),
+    ).optional().describe("Bad Request"),
     twoHundredApplicationJsonObject: z.lazy(() =>
       ExpireSecretResponseBody$zodSchema
-    ).optional(),
+    ).optional().describe("OK"),
   });
